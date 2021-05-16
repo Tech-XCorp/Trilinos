@@ -519,6 +519,6 @@ void triangle_generic(
 
 }
 
-}
-}
+} // end namespace Experimental
+} // end namespace KokkosGraph
 #endif

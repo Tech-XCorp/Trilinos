@@ -156,5 +156,7 @@ struct SerialRCM
   }
 };
 
-}}} //namespace KokkosGraph::Experimental::Impl
+} // end namespace Impl
+} // end namespace Experimental
+} // end namespace KokkosGraph
 #endif

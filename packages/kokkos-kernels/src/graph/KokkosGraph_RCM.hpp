@@ -73,6 +73,7 @@ graph_rcm(const rowmap_t& rowmap, const colinds_t& colinds)
   return algo.rcm();
 }
 
-}}  //namespace KokkosGraph::Experimental
+} // end namespace Experimental
+} // end namespace KokkosGraph
 
 #endif

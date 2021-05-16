@@ -116,6 +116,7 @@ void graph_explicit_coarsen_with_inverse_map(
   }
 }
   
-}}
+} // end namespace Experimental
+} // end namespace KokkosGraph
 
 #endif

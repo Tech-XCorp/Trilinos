@@ -970,6 +970,8 @@ struct D2_MIS_Coarsening
   labels_t labels;
 };
 
-}}}
+} // end namespace Impl
+} // end namespace Experimental
+} // end namespace KokkosGraph
 
 #endif
