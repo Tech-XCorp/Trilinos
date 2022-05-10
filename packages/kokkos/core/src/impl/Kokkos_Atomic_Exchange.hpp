@@ -244,9 +244,18 @@ template <typename T>
 inline void atomic_assign(
     volatile T* const dest,
     std::enable_if_t<sizeof(T) == sizeof(int) || sizeof(T) == sizeof(long),
-                     const T&>
-        val) {
+#ifdef _WIN32
+        sizeof(T) == sizeof(long long),
+#else
+        sizeof(T) == sizeof(long),
+#endif
+        const T&>::type val) {
+
+#ifdef _WIN32
+  using type = std::conditional_t<sizeof(T) == sizeof(int), int, long long>;
+#else
   using type = std::conditional_t<sizeof(T) == sizeof(int), int, long>;
+#endif
 
 #if defined(KOKKOS_ENABLE_RFO_PREFETCH)
   _mm_prefetch((const char*)dest, _MM_HINT_ET0);
@@ -354,7 +363,8 @@ inline void atomic_assign(volatile T* const dest_v, const T val) {
   T* dest = const_cast<T*>(dest_v);
   *dest   = val;
 }
-
+#else
+#pragma message("WARNING: no atomics defined")
 #endif
 #endif
 
