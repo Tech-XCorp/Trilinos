@@ -46,6 +46,8 @@
 /* Kokkos interfaces */
 
 #include <Kokkos_Macros.hpp>
+#define _STR(x) #x
+#define STR(x) _STR(x)
 #ifdef KOKKOS_ENABLE_CUDA
 
 #include <Kokkos_Core.hpp>
@@ -107,15 +109,19 @@ namespace Impl {
 namespace {
 
 __global__ void query_cuda_kernel_arch(int *d_arch) {
+#pragma message "query __CUDA_ARCH__ = " STR(__CUDA_ARCH__)
 #if defined(__CUDA_ARCH__)
+  printf("kernel __CUDA_ARCH__ = %i.\n", __CUDA_ARCH__);
   *d_arch = __CUDA_ARCH__;
 #else
+  printf("kernel __CUDA_ARCH__ is not defined.\n");
   *d_arch = 0;
 #endif
 }
 
 /** Query what compute capability is actually launched to the device: */
 int cuda_kernel_arch() {
+// #pragma message "CUDA_ARCH = " STR(__CUDA_ARCH__)
   int arch    = 0;
   int *d_arch = nullptr;
 
@@ -123,6 +129,11 @@ int cuda_kernel_arch() {
   cudaMemcpy(d_arch, &arch, sizeof(int), cudaMemcpyDefault);
 
   query_cuda_kernel_arch<<<1, 1>>>(d_arch);
+  cudaError_t err = cudaGetLastError();        // Get error code
+  if (err != cudaSuccess) {
+    printf("CUDA Error: %s\n", cudaGetErrorString(err));
+    exit(-1);
+  }
 
   cudaMemcpy(&arch, d_arch, sizeof(int), cudaMemcpyDefault);
   cudaFree(d_arch);
