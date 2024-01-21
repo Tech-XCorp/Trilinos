@@ -1481,6 +1481,10 @@ macro(tribits_setup_env)
   if (${PROJECT_NAME}_ENABLE_Fortran)
     enable_language(Fortran)
   endif()
+  
+  if (TPL_ENABLE_CUDA)
+    enable_language(CUDA)
+  endif()
 
   # Do some project-specific tweaks for compiler options, etc.
   set(PROJECT_COMPILER_CONFIG_FILE
@@ -2065,8 +2069,10 @@ macro(tribits_configure_enabled_packages)
         tribits_trace_file_processing(PACKAGE  ADD_SUBDIR
           "${TRIBITS_PACKAGE_CMAKELIST_FILE}")
         if (NOT ${TRIBITS_PACKAGE}_SOURCE_DIR STREQUAL ${PROJECT_NAME}_SOURCE_DIR)
+          message(STATUS "Adding subdirectory: source = ${${TRIBITS_PACKAGE}_SOURCE_DIR}; binary = ${${TRIBITS_PACKAGE}_BINARY_DIR}")
           add_subdirectory(${${TRIBITS_PACKAGE}_SOURCE_DIR}
             ${${TRIBITS_PACKAGE}_BINARY_DIR})
+          message(STATUS "After subdirectory processing: TRILINOS_COMPILE_LANGUAGE = ${TRILINOS_COMPILE_LANGUAGE}")
         else()
           include("${TRIBITS_PACKAGE_CMAKELIST_FILE}")
         endif()

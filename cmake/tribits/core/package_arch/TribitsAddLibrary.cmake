@@ -368,6 +368,17 @@ function(tribits_add_library  LIBRARY_NAME_IN)
   if(PARSE_SOURCES)
     list(REMOVE_DUPLICATES PARSE_SOURCES)
   endif()
+  
+  # Set source language here
+  message(STATUS "In tribits_add_library for ${LIBRARY_NAME}: TRILINOS_COMPILE_LANGUAGE = ${TRILINOS_COMPILE_LANGUAGE}")
+  foreach(source ${PARSE_SOURCES})
+    set_source_files_properties(${source} PROPERTIES LANGUAGE ${TRILINOS_COMPILE_LANGUAGE})
+  endforeach()
+  if("${LIBRARY_NAME}" STREQUAL "tpetraext")
+    message(STATUS "PARSE_SOURCES = ${PARSE_SOURCES}")
+    message(STATUS "PARSE_HEADERS = ${PARSE_HEADERS}")
+  endif()
+
 
   # Library not added by default
   if(PARSE_ADDED_LIB_TARGET_NAME_OUT)
