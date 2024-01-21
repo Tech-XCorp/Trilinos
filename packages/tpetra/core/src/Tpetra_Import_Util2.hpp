@@ -735,6 +735,8 @@ sortAndMergeCrsEntries (const Teuchos::ArrayView<size_t> &CRS_rowptr,
   return sortAndMergeCrsEntries(CRS_rowptr, CRS_colind, CRS_vals);
 }
 
+#ifndef _WIN32
+
 template<class rowptr_view_type, class colind_view_type, class vals_view_type>
 void
 sortAndMergeCrsEntries(rowptr_view_type& CRS_rowptr,
@@ -752,6 +754,7 @@ sortAndMergeCrsEntries(rowptr_view_type& CRS_rowptr,
 									CRS_rowptr, CRS_colind, CRS_vals);
 }
 
+#endif
 
 template <typename LocalOrdinal, typename GlobalOrdinal, typename Node>
 void
