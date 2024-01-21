@@ -132,8 +132,6 @@ ELSE()
   SET(KOKKOS_COMPILE_LANGUAGE CXX)
   # Replicate the logic in place for non-Trilinos builds do that downstream
   # Trilinos packages can use the CUDA compiler as necessary.
-  message(STATUS "Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE = ${Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE}")
-  message(STATUS "Kokkos_ENABLE_CUDA = ${Kokkos_ENABLE_CUDA}")
   IF (Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE AND Kokkos_ENABLE_CUDA)
     SET(KOKKOS_INTERNAL_EXTRA_COMPILE_LANGUAGE CXX)
     SET(KOKKOS_COMPILE_LANGUAGE CUDA)
