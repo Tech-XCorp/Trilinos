@@ -262,7 +262,10 @@ public:
 
 // A = P B P^{-1}
 template <typename CrsMatrixType, typename OrdinalTypeArray>
-inline static void applyPermutationToCrsMatrix(/* */ CrsMatrixType &A, const CrsMatrixType &B,
+#ifndef _WIN32
+inline
+#endif
+void applyPermutationToCrsMatrix(/* */ CrsMatrixType &A, const CrsMatrixType &B,
                                                const OrdinalTypeArray &p, const OrdinalTypeArray &ip) {
   const ordinal_type m = A.NumRows(); //, n = A.NumCols();
   typedef typename CrsMatrixType::exec_space exec_space;
@@ -316,7 +319,10 @@ inline static void applyPermutationToCrsMatrix(/* */ CrsMatrixType &A, const Crs
 
 // A = P B P^{-1}
 template <typename CrsMatrixType, typename OrdinalTypeArray>
-inline static void applyPermutationToCrsMatrixLower(/* */ CrsMatrixType &A, const CrsMatrixType &B,
+#ifndef _WIN32
+inline
+#endif
+void applyPermutationToCrsMatrixLower(/* */ CrsMatrixType &A, const CrsMatrixType &B,
                                                     const OrdinalTypeArray &p, const OrdinalTypeArray &ip) {
   const ordinal_type m = A.NumRows(); //, n = A.NumCols();
   typedef typename CrsMatrixType::exec_space exec_space;
