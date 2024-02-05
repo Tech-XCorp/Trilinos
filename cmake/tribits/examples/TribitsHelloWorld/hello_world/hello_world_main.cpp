@@ -1,1 +1,6 @@
-../../RawHelloWorld/hello_world/hello_world_main.cpp
+#include <iostream>
+#include "hello_world_lib.hpp"
+int main() {
+  std::cout << HelloWorld::getHelloWorld() << "\n";
+  return 0;
+}

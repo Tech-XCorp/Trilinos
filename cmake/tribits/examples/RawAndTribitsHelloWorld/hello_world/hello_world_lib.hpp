@@ -1,1 +1,3 @@
-../../RawHelloWorld/hello_world/hello_world_lib.hpp
+#include <string>
+
+namespace HelloWorld { std::string getHelloWorld(); }

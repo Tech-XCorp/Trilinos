@@ -1,4 +1,4 @@
-INCLUDE(CheckCXXSourceCompiles)
+INCLUDE(CheckSourceCompiles)
 
 # This checks two things.  First, it checks whether
 # __attribute__((weak)) compiles in C++, when dealing with an extern
@@ -61,7 +61,7 @@ int main() {
   )
   
   # This is a local variable name.  ${VARNAME} is the output variable.
-  CHECK_CXX_SOURCE_COMPILES("${SOURCE}" HAVE_CXX_ATTRIBUTE_WEAK)
+  CHECK_SOURCE_COMPILES(${TRILINOS_COMPILE_LANGUAGE} "${SOURCE}" HAVE_CXX_ATTRIBUTE_WEAK)
 
   IF(HAVE_CXX_ATTRIBUTE_WEAK)
     GLOBAL_SET(${VARNAME} TRUE)
