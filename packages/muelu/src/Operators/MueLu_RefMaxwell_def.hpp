@@ -1203,7 +1203,7 @@ void RefMaxwell<Scalar, LocalOrdinal, GlobalOrdinal, Node>::build22Matrix(const 
     }
   }
 
-  if (not A22_.is_null() and not disable_addon_22_ and spaceNumber_ > 1) {
+  if (!A22_.is_null() && !disable_addon_22_ && spaceNumber_ > 1) {
     const Scalar one = Teuchos::ScalarTraits<Scalar>::one();
 
     RCP<Matrix> addon22 = buildAddon(spaceNumber_ - 1);

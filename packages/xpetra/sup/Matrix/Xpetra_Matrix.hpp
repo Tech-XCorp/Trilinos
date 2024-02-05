@@ -330,6 +330,16 @@ class Matrix : public Xpetra::Operator<Scalar, LocalOrdinal, GlobalOrdinal, Node
     return operatorViewTable_.get(viewLabel)->GetColMap();
   }
 
+  //! Computes the matrix-multivector multiplication for region layout matrices
+  virtual void apply(const Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > &X,
+                      Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > &Y,
+                      Teuchos::ETransp mode,
+                      Scalar alpha,
+                      Scalar beta,
+                      bool sumInterfaceValues,
+                      const RCP<Import<LocalOrdinal, GlobalOrdinal, Node> >& regionInterfaceImporter,
+                      const Teuchos::ArrayRCP<LocalOrdinal>& regionInterfaceLIDs ) const =0;
+
   //! Returns the number of global rows in this matrix.
   /** Undefined if isFillActive().
    */
@@ -579,9 +589,9 @@ class Matrix : public Xpetra::Operator<Scalar, LocalOrdinal, GlobalOrdinal, Node
   // ----------------------------------------------------------------------------------
 
   //! Compute a residual R = B - (*this) * X
-  virtual void residual(const MultiVector<Scalar, LocalOrdinal, GlobalOrdinal, Node> &X,
-                        const MultiVector<Scalar, LocalOrdinal, GlobalOrdinal, Node> &B,
-                        MultiVector<Scalar, LocalOrdinal, GlobalOrdinal, Node> &R) const = 0;
+  virtual void residual(const Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & X,
+                        const Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & B,
+                        Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & R) const = 0;
 
  protected:
   Teuchos::Hashtable<viewLabel_t, RCP<MatrixView> > operatorViewTable_;  // hashtable storing the operator views (keys = view names, values = views).

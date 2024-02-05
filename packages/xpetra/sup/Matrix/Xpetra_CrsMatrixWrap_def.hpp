@@ -370,6 +370,21 @@ RCP<const Xpetra::Map<LocalOrdinal, GlobalOrdinal, Node>> CrsMatrixWrap<Scalar, 
 template <class Scalar, class LocalOrdinal, class GlobalOrdinal, class Node>
 const RCP<const Xpetra::Map<LocalOrdinal, GlobalOrdinal, Node>> &CrsMatrixWrap<Scalar, LocalOrdinal, GlobalOrdinal, Node>::getColMap() const { return getColMap(Matrix::GetCurrentViewLabel()); }
 
+/* Ben has this extra function.  Needed?
+  template <class Scalar, class LocalOrdinal, class GlobalOrdinal, class Node>
+  void CrsMatrixWrap<Scalar,LocalOrdinal,GlobalOrdinal,Node>::apply(const Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > &X,
+                  Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > &Y,
+                  Teuchos::ETransp mode,
+                  Scalar alpha,
+                  Scalar beta,
+                  bool sumInterfaceValues,
+                  const RCP<Import<LocalOrdinal, GlobalOrdinal, Node> >& regionInterfaceImporter,
+                  const Teuchos::ArrayRCP<LocalOrdinal>& regionInterfaceLIDs
+  ) const{
+      matrixData_->apply(X,Y,mode,alpha,beta,sumInterfaceValues,regionInterfaceImporter,regionInterfaceLIDs);
+  }
+*/
+
 template <class Scalar, class LocalOrdinal, class GlobalOrdinal, class Node>
 const RCP<const Xpetra::Map<LocalOrdinal, GlobalOrdinal, Node>> &CrsMatrixWrap<Scalar, LocalOrdinal, GlobalOrdinal, Node>::getColMap(viewLabel_t viewLabel) const {
   TEUCHOS_TEST_FOR_EXCEPTION(Matrix::operatorViewTable_.containsKey(viewLabel) == false, Xpetra::Exceptions::RuntimeError, "Xpetra::Matrix.GetColMap(): view '" + viewLabel + "' does not exist.");
@@ -520,4 +535,21 @@ void CrsMatrixWrap<Scalar, LocalOrdinal, GlobalOrdinal, Node>::residual(
 
 }  // namespace Xpetra
 
-#endif  // ifndef XPETRA_CRSMATRIXWRAP_DEF_HPP
+// Ben added these two functions.  Needed?
+  template <class Scalar, class LocalOrdinal, class GlobalOrdinal, class Node>
+  LocalOrdinal CrsMatrixWrap<Scalar,LocalOrdinal,GlobalOrdinal,Node>::GetStorageBlockSize() const {
+    return matrixData_->GetStorageBlockSize();
+  }
+
+  template <class Scalar, class LocalOrdinal, class GlobalOrdinal, class Node>
+  void CrsMatrixWrap<Scalar,LocalOrdinal,GlobalOrdinal,Node>::residual(
+            const Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & X, 
+            const Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & B,
+            Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & R) const {
+    matrixData_->residual(X,B,R);
+  }
+
+
+} //namespace Xpetra
+
+#endif //ifndef XPETRA_CRSMATRIXWRAP_DEF_HPP
