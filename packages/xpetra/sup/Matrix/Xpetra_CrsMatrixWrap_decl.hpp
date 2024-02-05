@@ -390,8 +390,8 @@ public:
                    Scalar beta = ScalarTraits<Scalar>::zero()) const;
 
   //! Computes the matrix-multivector multiplication for region layout matrices
-  virtual void apply(const MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > &X,
-                    MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > &Y,
+  virtual void apply(const Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > &X,
+                    Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > &Y,
                     Teuchos::ETransp mode,
                     Scalar alpha,
                     Scalar beta,
@@ -482,9 +482,9 @@ public:
   LocalOrdinal GetStorageBlockSize() const;
 
   //! Compute a residual R = B - (*this) * X
-  void residual(const MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & X,
-                const MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & B,
-                MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & R) const;
+  void residual(const Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & X,
+                const Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & B,
+                Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & R) const;
   
 
   //! Expert only

@@ -360,8 +360,8 @@ namespace Xpetra {
   }
 
   template <class Scalar, class LocalOrdinal, class GlobalOrdinal, class Node>
-  void CrsMatrixWrap<Scalar,LocalOrdinal,GlobalOrdinal,Node>::apply(const MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > &X,
-                  MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > &Y,
+  void CrsMatrixWrap<Scalar,LocalOrdinal,GlobalOrdinal,Node>::apply(const Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > &X,
+                  Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > &Y,
                   Teuchos::ETransp mode,
                   Scalar alpha,
                   Scalar beta,
@@ -533,9 +533,9 @@ namespace Xpetra {
 
   template <class Scalar, class LocalOrdinal, class GlobalOrdinal, class Node>
   void CrsMatrixWrap<Scalar,LocalOrdinal,GlobalOrdinal,Node>::residual(
-            const MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & X, 
-            const MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & B,
-            MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & R) const {
+            const Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & X, 
+            const Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & B,
+            Xpetra::MultiVector< Scalar, LocalOrdinal, GlobalOrdinal, Node > & R) const {
     matrixData_->residual(X,B,R);
   }
 

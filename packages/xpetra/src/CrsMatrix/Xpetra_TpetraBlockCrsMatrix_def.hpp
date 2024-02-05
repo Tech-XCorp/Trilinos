@@ -846,7 +846,7 @@ getLocalMatrixDevice () const
 }
 
 template<class Scalar, class LocalOrdinal, class GlobalOrdinal, class Node>
-typename CrsMatrix<Scalar,LocalOrdinal,GlobalOrdinal,Node>::local_matrix_type::HostMirror
+typename TpetraBlockCrsMatrix<Scalar,LocalOrdinal,GlobalOrdinal,Node>::local_matrix_type::HostMirror
 TpetraBlockCrsMatrix<Scalar,LocalOrdinal,GlobalOrdinal,Node>::
 getLocalMatrixHost () const
 {

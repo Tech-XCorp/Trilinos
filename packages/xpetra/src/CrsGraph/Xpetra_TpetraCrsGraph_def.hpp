@@ -323,7 +323,7 @@ void TpetraCrsGraph<LocalOrdinal,GlobalOrdinal,Node>::getLocalRowView(LocalOrdin
 }
 
 template<class LocalOrdinal, class GlobalOrdinal, class Node>
-typename Xpetra::CrsGraph<LocalOrdinal,GlobalOrdinal,Node>::local_graph_type::HostMirror TpetraCrsGraph<LocalOrdinal,GlobalOrdinal,Node>::getLocalGraphHost () const {
+typename TpetraCrsGraph<LocalOrdinal,GlobalOrdinal,Node>::local_graph_type::HostMirror TpetraCrsGraph<LocalOrdinal,GlobalOrdinal,Node>::getLocalGraphHost () const {
   return getTpetra_CrsGraph()->getLocalGraphHost();
 }
 

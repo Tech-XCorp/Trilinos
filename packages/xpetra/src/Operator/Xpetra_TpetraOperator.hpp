@@ -70,13 +70,13 @@ namespace Xpetra {
     //@{
 
     //! The Map associated with the domain of this operator, which must be compatible with X.getMap().
-    virtual Teuchos::RCP<const Map<LocalOrdinal,GlobalOrdinal,Node> > getDomainMap() const {
+    virtual Teuchos::RCP<const Xpetra::Map<LocalOrdinal,GlobalOrdinal,Node> > getDomainMap() const {
       XPETRA_MONITOR("TpetraOperator::getDomainMap()");
       return toXpetra(op_->getDomainMap());
     }
 
     //! The Map associated with the range of this operator, which must be compatible with Y.getMap().
-    virtual Teuchos::RCP<const Map<LocalOrdinal,GlobalOrdinal,Node> > getRangeMap() const {
+    virtual Teuchos::RCP<const Xpetra::Map<LocalOrdinal,GlobalOrdinal,Node> > getRangeMap() const {
       XPETRA_MONITOR("TpetraOperator::getRangeMap()");
       return toXpetra(op_->getRangeMap());
     }
