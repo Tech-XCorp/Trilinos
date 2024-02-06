@@ -51,6 +51,11 @@ include(TribitsReportInvalidTribitsUsage)
 include(TribitsDeprecatedHelpers)
 include(TribitsSetAndIncDirs)
 
+# List of packages to exclude from setting language based on Kokkos configuration
+set(TRIBITS_NOKOKKOS_PACKAGES
+  aztecoo
+  amesos
+  ml)
 
 # @FUNCTION: tribits_add_library()
 #
@@ -371,12 +376,11 @@ function(tribits_add_library  LIBRARY_NAME_IN)
   
   # Set source language here
   message(STATUS "In tribits_add_library for ${LIBRARY_NAME}: TRILINOS_COMPILE_LANGUAGE = ${TRILINOS_COMPILE_LANGUAGE}")
-  foreach(source ${PARSE_SOURCES})
-    set_source_files_properties(${source} PROPERTIES LANGUAGE ${TRILINOS_COMPILE_LANGUAGE})
-  endforeach()
-  if("${LIBRARY_NAME}" STREQUAL "thyracore")
-    message(STATUS "PARSE_SOURCES = ${PARSE_SOURCES}")
-    message(STATUS "PARSE_HEADERS = ${PARSE_HEADERS}")
+  if((DEFINED TRILINOS_COMPILE_LANGUAGE) AND NOT (${LIBRARY_NAME} IN_LIST TRIBITS_NOKOKKOS_PACKAGES))
+    message(STATUS "  Setting compile language.")
+    foreach(source ${PARSE_SOURCES})
+      set_source_files_properties(${source} PROPERTIES LANGUAGE ${TRILINOS_COMPILE_LANGUAGE})
+    endforeach()
   endif()
 
   # Library not added by default
