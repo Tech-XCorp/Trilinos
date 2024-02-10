@@ -55,7 +55,8 @@ include(TribitsSetAndIncDirs)
 set(TRIBITS_NOKOKKOS_PACKAGES
   aztecoo
   amesos
-  ml)
+  ml
+  zoltan)
 
 # @FUNCTION: tribits_add_library()
 #
