@@ -64,7 +64,7 @@ int pop_count(long i) { return _popcnt64(i); }
 KOKKOS_FORCEINLINE_FUNCTION
 int pop_count(long long i) { return _popcnt64(i); }
 
-#elif defined(__GNUC__) || defined(__GNUG__)
+#elif defined(__GNUC__) || defined(__GNUG__) || defined(KOKKOS_COMPILER_CLANG)
 KOKKOS_FORCEINLINE_FUNCTION
 int pop_count(unsigned i) { return __builtin_popcount(i); }
 KOKKOS_FORCEINLINE_FUNCTION
@@ -223,7 +223,7 @@ int least_set_bit( long long i ){
 */
 
 #elif defined(__INTEL_COMPILER) || defined(KOKKOS_COMPILER_IBM) || \
-    defined(__GNUC__) || defined(__GNUG__)
+    defined(__GNUC__) || defined(__GNUG__) || defined(KOKKOS_COMPILER_CLANG)
 KOKKOS_FORCEINLINE_FUNCTION
 int least_set_bit(unsigned i) { return __builtin_ffs(i); }
 KOKKOS_FORCEINLINE_FUNCTION
