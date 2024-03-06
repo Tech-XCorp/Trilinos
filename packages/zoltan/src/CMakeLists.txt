@@ -506,7 +506,7 @@ APPEND_SET(SOURCES
   Utilities/shared/zoltan_align.c
   Utilities/shared/zoltan_id.c
   )
-
+set_source_files_properties(Utilities/Communication/comm_default.c PROPERTIES LANGUAGE CXX)
 #
 # src/zz
 #

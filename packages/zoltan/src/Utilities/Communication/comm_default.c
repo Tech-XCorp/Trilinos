@@ -45,27 +45,32 @@
  */
 
 #include "comm.h"
-#include <pthread.h>
+#include <mutex>
 
 #ifdef __cplusplus
 /* if C++, define the rest of this header file as extern C */
 extern "C" {
 #endif
-static pthread_mutex_t zoltan_global_mpi_lock;
+static std::mutex zoltan_global_mpi_lock;
+// static pthread_mutex_t zoltan_global_mpi_lock;
 static MPI_Comm Zoltan_Global_MPI_Comm = MPI_COMM_WORLD; // CHECK: ALLOW MPI_COMM_WORLD
 
 /* Function to set the default communicator */
 void zoltan_initialize_global_comm(MPI_Comm comm) {
-  pthread_mutex_lock(&zoltan_global_mpi_lock);
+  // pthread_mutex_lock(&zoltan_global_mpi_lock);
+  zoltan_global_mpi_lock.lock();
   Zoltan_Global_MPI_Comm = comm;
-  pthread_mutex_unlock(&zoltan_global_mpi_lock);
+  // pthread_mutex_unlock(&zoltan_global_mpi_lock);
+  zoltan_global_mpi_lock.unlock();
 }
 
 /* Function to get the default communicator */
 MPI_Comm zoltan_get_global_comm() {
-  pthread_mutex_lock(&zoltan_global_mpi_lock);
+  // pthread_mutex_lock(&zoltan_global_mpi_lock);
+  zoltan_global_mpi_lock.lock();
   MPI_Comm comm = Zoltan_Global_MPI_Comm;
-  pthread_mutex_unlock(&zoltan_global_mpi_lock);
+  // pthread_mutex_unlock(&zoltan_global_mpi_lock);
+  zoltan_global_mpi_lock.unlock();
   return comm;
 }
 
