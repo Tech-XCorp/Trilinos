@@ -34,7 +34,7 @@ int PMPI_Msend (void* message, int count, MPI_Datatype datatype, int dest, int t
   {
     size = _MPI_calculateSize(count, datatype);  
     p = (char *)_MPI_safeMalloc(size, "Error with malloc for send buffer."); 
-    p = memcpy(p, message, size);
+    p = (char *)memcpy(p, message, size);
     retval =_MPI_Buff_Insert(p, count, datatype, tag, comm);
     return retval;
   } else { 

@@ -65,7 +65,7 @@ GLOBAL Int TRILINOS_AMD_post_tree
 	/* get head of stack */
 	ASSERT (head < nn) ;
 	i = Stack [head] ;
-	TRILINOS_AMD_DEBUG1 (("head of stack "ID" \n", i)) ;
+	TRILINOS_AMD_DEBUG1 (("head of stack " ID " \n", i)) ;
 	ASSERT (i >= 0 && i < nn) ;
 
 	if (Child [i] != TRILINOS_AMD_EMPTY)
@@ -86,7 +86,7 @@ GLOBAL Int TRILINOS_AMD_post_tree
 	    {
 		ASSERT (h > 0) ;
 		Stack [h--] = f ;
-		TRILINOS_AMD_DEBUG1 (("push "ID" on stack\n", f)) ;
+		TRILINOS_AMD_DEBUG1 (("push " ID " on stack\n", f)) ;
 		ASSERT (f >= 0 && f < nn) ;
 	    }
 	    ASSERT (Stack [h] == i) ;
@@ -99,7 +99,7 @@ GLOBAL Int TRILINOS_AMD_post_tree
 	    /* the children of i (if there were any) are already ordered */
 	    /* remove i from the stack and order it.  Front i is kth front */
 	    head-- ;
-	    TRILINOS_AMD_DEBUG1 (("pop "ID" order "ID"\n", i, k)) ;
+	    TRILINOS_AMD_DEBUG1 (("pop " ID " order " ID "\n", i, k)) ;
 	    Order [i] = k++ ;
 	    ASSERT (k <= nn) ;
 	}

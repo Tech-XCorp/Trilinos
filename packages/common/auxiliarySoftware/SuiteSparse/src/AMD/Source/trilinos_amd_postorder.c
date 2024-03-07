@@ -68,8 +68,8 @@ GLOBAL void TRILINOS_AMD_postorder
 	{
 	    if (Nv [j] > 0)
 	    {
-		TRILINOS_AMD_DEBUG1 (( ""ID" :  nels "ID" npiv "ID" size "ID
-		    " parent "ID" maxfr "ID"\n", j, nels,
+		TRILINOS_AMD_DEBUG1 (( "" ID " :  nels " ID " npiv " ID " size "ID
+		    " parent " ID " maxfr " ID "\n", j, nels,
 		    Nv [j], Fsize [j], Parent [j], Fsize [j])) ;
 		/* this is an element */
 		/* dump the link list of children */
@@ -107,12 +107,12 @@ GLOBAL void TRILINOS_AMD_postorder
 
 #ifndef NDEBUG
 	    Int nchild ;
-	    TRILINOS_AMD_DEBUG1 (("Before partial sort, element "ID"\n", i)) ;
+	    TRILINOS_AMD_DEBUG1 (("Before partial sort, element " ID "\n", i)) ;
 	    nchild = 0 ;
 	    for (f = Child [i] ; f != TRILINOS_AMD_EMPTY ; f = Sibling [f])
 	    {
 		ASSERT (f >= 0 && f < nn) ;
-		TRILINOS_AMD_DEBUG1 (("      f: "ID"  size: "ID"\n", f, Fsize [f])) ;
+		TRILINOS_AMD_DEBUG1 (("      f: " ID "  size: " ID "\n", f, Fsize [f])) ;
 		nchild++ ;
 		ASSERT (nchild <= nn) ;
 	    }
@@ -140,7 +140,7 @@ GLOBAL void TRILINOS_AMD_postorder
 
 	    fnext = Sibling [bigf] ;
 
-	    TRILINOS_AMD_DEBUG1 (("bigf "ID" maxfrsize "ID" bigfprev "ID" fnext "ID
+	    TRILINOS_AMD_DEBUG1 (("bigf " ID " maxfrsize " ID " bigfprev " ID " fnext " ID
 		" fprev " ID"\n", bigf, maxfrsize, bigfprev, fnext, fprev)) ;
 
 	    if (fnext != TRILINOS_AMD_EMPTY)
@@ -167,11 +167,11 @@ GLOBAL void TRILINOS_AMD_postorder
 	    }
 
 #ifndef NDEBUG
-	    TRILINOS_AMD_DEBUG1 (("After partial sort, element "ID"\n", i)) ;
+	    TRILINOS_AMD_DEBUG1 (("After partial sort, element " ID "\n", i)) ;
 	    for (f = Child [i] ; f != TRILINOS_AMD_EMPTY ; f = Sibling [f])
 	    {
 		ASSERT (f >= 0 && f < nn) ;
-		TRILINOS_AMD_DEBUG1 (("        "ID"  "ID"\n", f, Fsize [f])) ;
+		TRILINOS_AMD_DEBUG1 (("        " ID "  " ID "\n", f, Fsize [f])) ;
 		ASSERT (Nv [f] > 0) ;
 		nchild-- ;
 	    }
@@ -196,7 +196,7 @@ GLOBAL void TRILINOS_AMD_postorder
     {
 	if (Parent [i] == TRILINOS_AMD_EMPTY && Nv [i] > 0)
 	{
-	    TRILINOS_AMD_DEBUG1 (("Root of assembly tree "ID"\n", i)) ;
+	    TRILINOS_AMD_DEBUG1 (("Root of assembly tree " ID "\n", i)) ;
 	    k = TRILINOS_AMD_post_tree (i, k, Child, Sibling, Order, Stack
 #ifndef NDEBUG
 		, nn

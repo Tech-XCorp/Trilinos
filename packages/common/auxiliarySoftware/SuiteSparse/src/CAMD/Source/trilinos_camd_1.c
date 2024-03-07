@@ -89,7 +89,7 @@ GLOBAL void TRILINOS_CAMD_1
 
     for (k = 0 ; k < n ; k++)
     {
-	TRILINOS_CAMD_DEBUG1 (("Construct row/column k= "ID" of A+A'\n", k))  ;
+	TRILINOS_CAMD_DEBUG1 (("Construct row/column k= " ID " of A+A'\n", k))  ;
 	p1 = Ap [k] ;
 	p2 = Ap [k+1] ;
 

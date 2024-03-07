@@ -77,11 +77,11 @@ int PMPI_Type_struct(
   info = _MPI_TYPE_LIST[index].info;
   info->count = count;
   info->blocklen = (int *) _MPI_safeMalloc(sizeof(int)*count, "MPI_TYPE_STRUCT: Error with malloc");;
-  info->blocklen = memcpy(info->blocklen, blocklens, sizeof(int)*count);
+  info->blocklen = (int *)memcpy(info->blocklen, blocklens, sizeof(int)*count);
   info->stride = (int *) _MPI_safeMalloc(sizeof(int)*count, "MPI_TYPE_STRUCT: Error with malloc");;
-  info->stride = memcpy(info->stride, indices, sizeof(int)*count);
+  info->stride = (int *)memcpy(info->stride, indices, sizeof(int)*count);
   info->types = (MPI_Datatype *) _MPI_safeMalloc(sizeof(MPI_Datatype)*count, "MPI_TYPE_STRUCT: Error with malloc");;
-  info->types = memcpy(info->types, old_types, sizeof(int)*count);
+  info->types = (int *)memcpy(info->types, old_types, sizeof(int)*count);
 
   /* ================================ */
   /* Create linked list of structures */

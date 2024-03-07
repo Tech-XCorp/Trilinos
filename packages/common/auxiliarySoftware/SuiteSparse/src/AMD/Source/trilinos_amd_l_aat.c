@@ -64,7 +64,7 @@ GLOBAL size_t TRILINOS_AMD_aat	/* returns nz in A+A' */
     {
 	p1 = Ap [k] ;
 	p2 = Ap [k+1] ;
-	TRILINOS_AMD_DEBUG2 (("\nAAT Column: "ID" p1: "ID" p2: "ID"\n", k, p1, p2)) ;
+	TRILINOS_AMD_DEBUG2 (("\nAAT Column: " ID " p1: " ID " p2: " ID "\n", k, p1, p2)) ;
 
 	/* construct A+A' */
 	for (p = p1 ; p < p2 ; )
@@ -77,7 +77,7 @@ GLOBAL size_t TRILINOS_AMD_aat	/* returns nz in A+A' */
 		 * add both A (j,k) and A (k,j) to the matrix A+A' */
 		Len [j]++ ;
 		Len [k]++ ;
-		TRILINOS_AMD_DEBUG3 (("    upper ("ID","ID") ("ID","ID")\n", j,k, k,j));
+		TRILINOS_AMD_DEBUG3 (("    upper (" ID "," ID ") (" ID "," ID ")\n", j,k, k,j));
 		p++ ;
 	    }
 	    else if (j == k)
@@ -106,7 +106,7 @@ GLOBAL size_t TRILINOS_AMD_aat	/* returns nz in A+A' */
 		     * add both A (i,j) and A (j,i) to the matrix A+A' */
 		    Len [i]++ ;
 		    Len [j]++ ;
-		    TRILINOS_AMD_DEBUG3 (("    lower ("ID","ID") ("ID","ID")\n",
+		    TRILINOS_AMD_DEBUG3 (("    lower (" ID "," ID ") (" ID "," ID ")\n",
 			i,j, j,i)) ;
 		    pj++ ;
 		}
@@ -139,7 +139,7 @@ GLOBAL size_t TRILINOS_AMD_aat	/* returns nz in A+A' */
 	     * add both A (i,j) and A (j,i) to the matrix A+A' */
 	    Len [i]++ ;
 	    Len [j]++ ;
-	    TRILINOS_AMD_DEBUG3 (("    lower cleanup ("ID","ID") ("ID","ID")\n",
+	    TRILINOS_AMD_DEBUG3 (("    lower cleanup (" ID "," ID ") (" ID "," ID ")\n",
 		i,j, j,i)) ;
 	}
     }
@@ -171,7 +171,7 @@ GLOBAL size_t TRILINOS_AMD_aat	/* returns nz in A+A' */
 
     TRILINOS_AMD_DEBUG1 (("AMD nz in A+A', excluding diagonal (nzaat) = %g\n",
 	(double) nzaat)) ;
-    TRILINOS_AMD_DEBUG1 (("   nzboth: "ID" nz: "ID" nzdiag: "ID" symmetry: %g\n",
+    TRILINOS_AMD_DEBUG1 (("   nzboth: " ID " nz: " ID " nzdiag: " ID " symmetry: %g\n",
 		nzboth, nz, nzdiag, sym)) ;
 
     if (Info != (double *) NULL)

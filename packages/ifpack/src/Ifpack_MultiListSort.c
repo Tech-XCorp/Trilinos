@@ -156,7 +156,7 @@ void ifpack_multilist_sort (int *const pbase, double *const daux, size_t total_e
   int itemp;
   double dtemp;
   const size_t size = 1;
-  register int *base_ptr = (int *) pbase;
+  int *base_ptr = (int *) pbase;
 
   /* Allocating SIZE bytes for a pivot buffer facilitates a better
      algorithm below since we can do comparisons directly on the pivot. */
@@ -275,7 +275,7 @@ void ifpack_multilist_sort (int *const pbase, double *const daux, size_t total_e
     int *const end_ptr = &base_ptr[size * (total_elems - 1)];
     int *tmp_ptr = base_ptr;
     int *thresh = min(end_ptr, base_ptr + max_thresh);
-    register int *run_ptr;
+    int *run_ptr;
 
     /* Find smallest element in first threshold and place it at the
        array's beginning.  This is the smallest array element,
