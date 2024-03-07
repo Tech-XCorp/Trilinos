@@ -53,7 +53,7 @@ MPI_Request _MPI_New_Request(void* buffer,
 
     /* Allocate a new strip */
     _MPI_REQ_LIST_OF_LISTS[i] =
-      _MPI_safeMalloc(_MPI_PREALLOCATION_SIZE*sizeof(_MPI_REQUEST_OBJECT),
+      (_MPI_REQUEST_OBJECT *)_MPI_safeMalloc(_MPI_PREALLOCATION_SIZE*sizeof(_MPI_REQUEST_OBJECT),
                       "Error malloc a new REQ strip");
 
     /* Zero out the new strip and select a new "good" req object */

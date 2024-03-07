@@ -1256,7 +1256,7 @@ PUBLIC Int CSYMAMD_MAIN		/* return TRUE if OK, FALSE otherwise */
     {
 	stats [TRILINOS_CCOLAMD_STATUS] = TRILINOS_CCOLAMD_ERROR_ncol_negative ;
 	stats [TRILINOS_CCOLAMD_INFO1] = n ;
-	DEBUG1 (("csymamd: n negative "ID" \n", n)) ;
+	DEBUG1 (("csymamd: n negative " ID " \n", n)) ;
     	return (FALSE) ;
     }
 
@@ -1265,7 +1265,7 @@ PUBLIC Int CSYMAMD_MAIN		/* return TRUE if OK, FALSE otherwise */
     {
 	stats [TRILINOS_CCOLAMD_STATUS] = TRILINOS_CCOLAMD_ERROR_nnz_negative ;
 	stats [TRILINOS_CCOLAMD_INFO1] = nnz ;
-	DEBUG1 (("csymamd: number of entries negative "ID" \n", nnz)) ;
+	DEBUG1 (("csymamd: number of entries negative " ID " \n", nnz)) ;
 	return (FALSE) ;
     }
 
@@ -1273,7 +1273,7 @@ PUBLIC Int CSYMAMD_MAIN		/* return TRUE if OK, FALSE otherwise */
     {
 	stats [TRILINOS_CCOLAMD_STATUS] = TRILINOS_CCOLAMD_ERROR_p0_nonzero ;
 	stats [TRILINOS_CCOLAMD_INFO1] = p [0] ;
-	DEBUG1 (("csymamd: p[0] not zero "ID"\n", p [0])) ;
+	DEBUG1 (("csymamd: p[0] not zero " ID "\n", p [0])) ;
 	return (FALSE) ;
     }
 
@@ -1291,7 +1291,7 @@ PUBLIC Int CSYMAMD_MAIN		/* return TRUE if OK, FALSE otherwise */
     if (!count)
     {
 	stats [TRILINOS_CCOLAMD_STATUS] = TRILINOS_CCOLAMD_ERROR_out_of_memory ;
-	DEBUG1 (("csymamd: allocate count (size "ID") failed\n", n+1)) ;
+	DEBUG1 (("csymamd: allocate count (size " ID ") failed\n", n+1)) ;
 	return (FALSE) ;
     }
 
@@ -1300,7 +1300,7 @@ PUBLIC Int CSYMAMD_MAIN		/* return TRUE if OK, FALSE otherwise */
     {
 	stats [TRILINOS_CCOLAMD_STATUS] = TRILINOS_CCOLAMD_ERROR_out_of_memory ;
 	(*release) ((void *) count) ;
-	DEBUG1 (("csymamd: allocate mark (size "ID") failed\n", n+1)) ;
+	DEBUG1 (("csymamd: allocate mark (size " ID ") failed\n", n+1)) ;
 	return (FALSE) ;
     }
 
@@ -1325,7 +1325,7 @@ PUBLIC Int CSYMAMD_MAIN		/* return TRUE if OK, FALSE otherwise */
 	    stats [TRILINOS_CCOLAMD_INFO2] = length ;
 	    (*release) ((void *) count) ;
 	    (*release) ((void *) mark) ;
-	    DEBUG1 (("csymamd: col "ID" negative length "ID"\n", j, length)) ;
+	    DEBUG1 (("csymamd: col " ID " negative length " ID "\n", j, length)) ;
 	    return (FALSE) ;
 	}
 
@@ -1341,7 +1341,7 @@ PUBLIC Int CSYMAMD_MAIN		/* return TRUE if OK, FALSE otherwise */
 		stats [TRILINOS_CCOLAMD_INFO3] = n ;
 		(*release) ((void *) count) ;
 		(*release) ((void *) mark) ;
-		DEBUG1 (("csymamd: row "ID" col "ID" out of bounds\n", i, j)) ;
+		DEBUG1 (("csymamd: row " ID " col " ID " out of bounds\n", i, j)) ;
 		return (FALSE) ;
 	    }
 
@@ -1353,7 +1353,7 @@ PUBLIC Int CSYMAMD_MAIN		/* return TRUE if OK, FALSE otherwise */
 		stats [TRILINOS_CCOLAMD_INFO1] = j ;
 		stats [TRILINOS_CCOLAMD_INFO2] = i ;
 		(stats [TRILINOS_CCOLAMD_INFO3]) ++ ;
-		DEBUG1 (("csymamd: row "ID" col "ID" unsorted/dupl.\n", i, j)) ;
+		DEBUG1 (("csymamd: row " ID " col " ID " unsorted/dupl.\n", i, j)) ;
 	    }
 
 	    if (mark [i] != j)
@@ -1392,7 +1392,7 @@ PUBLIC Int CSYMAMD_MAIN		/* return TRUE if OK, FALSE otherwise */
     n_row = mnz / 2 ;
     Mlen = TRILINOS_CCOLAMD_recommended (mnz, n_row, n) ;
     M = (Int *) ((*allocate) (Mlen, sizeof (Int))) ;
-    DEBUG1 (("csymamd: M is "ID"-by-"ID" with "ID" entries, Mlen = %g\n",
+    DEBUG1 (("csymamd: M is " ID "-by-" ID " with " ID " entries, Mlen = %g\n",
     	n_row, n, mnz, (double) Mlen)) ;
 
     if (!M)
@@ -1634,7 +1634,7 @@ PUBLIC Int TRILINOS_CCOLAMD_2	    /* returns TRUE if successful, FALSE otherwise
     {
 	stats [TRILINOS_CCOLAMD_STATUS] = TRILINOS_CCOLAMD_ERROR_nrow_negative ;
 	stats [TRILINOS_CCOLAMD_INFO1] = n_row ;
-	DEBUG1 (("trilinos_ccolamd: nrow negative "ID"\n", n_row)) ;
+	DEBUG1 (("trilinos_ccolamd: nrow negative " ID "\n", n_row)) ;
     	return (FALSE) ;
     }
 
@@ -1642,7 +1642,7 @@ PUBLIC Int TRILINOS_CCOLAMD_2	    /* returns TRUE if successful, FALSE otherwise
     {
 	stats [TRILINOS_CCOLAMD_STATUS] = TRILINOS_CCOLAMD_ERROR_ncol_negative ;
 	stats [TRILINOS_CCOLAMD_INFO1] = n_col ;
-	DEBUG1 (("trilinos_ccolamd: ncol negative "ID"\n", n_col)) ;
+	DEBUG1 (("trilinos_ccolamd: ncol negative " ID "\n", n_col)) ;
     	return (FALSE) ;
     }
 
@@ -1651,7 +1651,7 @@ PUBLIC Int TRILINOS_CCOLAMD_2	    /* returns TRUE if successful, FALSE otherwise
     {
 	stats [TRILINOS_CCOLAMD_STATUS] = TRILINOS_CCOLAMD_ERROR_nnz_negative ;
 	stats [TRILINOS_CCOLAMD_INFO1] = nnz ;
-	DEBUG1 (("trilinos_ccolamd: number of entries negative "ID"\n", nnz)) ;
+	DEBUG1 (("trilinos_ccolamd: number of entries negative " ID "\n", nnz)) ;
 	return (FALSE) ;
     }
 
@@ -1659,7 +1659,7 @@ PUBLIC Int TRILINOS_CCOLAMD_2	    /* returns TRUE if successful, FALSE otherwise
     {
 	stats [TRILINOS_CCOLAMD_STATUS] = TRILINOS_CCOLAMD_ERROR_p0_nonzero ;
 	stats [TRILINOS_CCOLAMD_INFO1] = p [0] ;
-	DEBUG1 (("trilinos_ccolamd: p[0] not zero "ID"\n", p [0])) ;
+	DEBUG1 (("trilinos_ccolamd: p[0] not zero " ID "\n", p [0])) ;
 	return (FALSE) ;
     }
 
@@ -1696,7 +1696,7 @@ PUBLIC Int TRILINOS_CCOLAMD_2	    /* returns TRUE if successful, FALSE otherwise
 	stats [TRILINOS_CCOLAMD_STATUS] = TRILINOS_CCOLAMD_ERROR_A_too_small ;
 	stats [TRILINOS_CCOLAMD_INFO1] = need ;
 	stats [TRILINOS_CCOLAMD_INFO2] = Alen ;
-	DEBUG1 (("trilinos_ccolamd: Need Alen >= "ID", given "ID"\n", need, Alen)) ;
+	DEBUG1 (("trilinos_ccolamd: Need Alen >= " ID ", given " ID "\n", need, Alen)) ;
 	return (FALSE) ;
     }
 
@@ -1795,7 +1795,7 @@ PUBLIC Int TRILINOS_CCOLAMD_2	    /* returns TRUE if successful, FALSE otherwise
     for (i = 1 ; i <= n_cset ; i++)
     {
 	cset_start [i] = cset_start [i-1] + csize [i-1] ;
-	DEBUG4 ((" cset_start ["ID"] = "ID" \n", i , cset_start [i])) ;
+	DEBUG4 ((" cset_start [" ID "] = " ID " \n", i , cset_start [i])) ;
 	temp_cstart [i] = cset_start [i] ;
     }
 
@@ -1846,7 +1846,7 @@ PUBLIC Int TRILINOS_CCOLAMD_2	    /* returns TRUE if successful, FALSE otherwise
 
     ASSERT (n_row2 == n_row - nempty_row - nnewlyempty_row - ndense_row) ;
     ASSERT (n_col2 == n_col - nempty_col - nnewlyempty_col - ndense_col) ;
-    DEBUG1 (("# dense rows "ID" cols "ID"\n", ndense_row, ndense_col)) ;
+    DEBUG1 (("# dense rows " ID " cols " ID "\n", ndense_row, ndense_col)) ;
 
     /* === Order the supercolumns =========================================== */
 
@@ -1930,7 +1930,7 @@ PUBLIC Int TRILINOS_CCOLAMD_2	    /* returns TRUE if successful, FALSE otherwise
         while (set1 < set2)
         {
             k += dead_cols [set1] ;
-            DEBUG3 (("Skip null/dense columns of set "ID"\n",set1)) ;
+            DEBUG3 (("Skip null/dense columns of set " ID "\n",set1)) ;
             set1++ ;
         }
         set1 = set2 ;
@@ -1938,7 +1938,7 @@ PUBLIC Int TRILINOS_CCOLAMD_2	    /* returns TRUE if successful, FALSE otherwise
         for (col = Front_cols [i] ; col != TRILINOS_CCOLAMDL_EMPTY ; col = Col [col].nextcol)
         {
             ASSERT (col >= 0 && col < n_col) ;
-            DEBUG1 (("trilinos_ccolamd output ordering: k "ID" col "ID"\n", k, col)) ;
+            DEBUG1 (("trilinos_ccolamd output ordering: k " ID " col " ID "\n", k, col)) ;
             p [k] = col ;
             ASSERT (A [col] == TRILINOS_CCOLAMDL_EMPTY) ;
 
@@ -1964,7 +1964,7 @@ PUBLIC Int TRILINOS_CCOLAMD_2	    /* returns TRUE if successful, FALSE otherwise
                 dead_cols [cs]-- ;
 #endif
                 ASSERT (k >= cset_start [cs] && k < cset_start [cs+1]) ;
-                DEBUG1 (("trilinos_ccolamd output ordering: k "ID" col "ID
+                DEBUG1 (("trilinos_ccolamd output ordering: k " ID " col " ID
                     " (dense or null col)\n", k, col)) ;
                 p [k] = col ;
                 A [col] = k ;
@@ -2080,7 +2080,7 @@ PRIVATE Int init_rows_cols	/* returns TRUE if OK, or FALSE otherwise */
 	    stats [TRILINOS_CCOLAMD_STATUS] = TRILINOS_CCOLAMD_ERROR_col_length_negative ;
 	    stats [TRILINOS_CCOLAMD_INFO1] = col ;
 	    stats [TRILINOS_CCOLAMD_INFO2] = Col [col].length ;
-	    DEBUG1 (("trilinos_ccolamd: col "ID" length "ID" < 0\n",
+	    DEBUG1 (("trilinos_ccolamd: col " ID " length " ID " < 0\n",
 			col, Col [col].length)) ;
 	    return (FALSE) ;
 	}
@@ -2109,7 +2109,7 @@ PRIVATE Int init_rows_cols	/* returns TRUE if OK, or FALSE otherwise */
 
     for (col = 0 ; col < n_col ; col++)
     {
-	DEBUG1 (("\nCcolamd input column "ID":\n", col)) ;
+	DEBUG1 (("\nCcolamd input column " ID ":\n", col)) ;
 	last_row = -1 ;
 
 	cp = &A [p [col]] ;
@@ -2118,7 +2118,7 @@ PRIVATE Int init_rows_cols	/* returns TRUE if OK, or FALSE otherwise */
 	while (cp < cp_end)
 	{
 	    row = *cp++ ;
-	    DEBUG1 (("row: "ID"\n", row)) ;
+	    DEBUG1 (("row: " ID "\n", row)) ;
 
 	    /* make sure row indices within range */
 	    if (row < 0 || row >= n_row)
@@ -2127,7 +2127,7 @@ PRIVATE Int init_rows_cols	/* returns TRUE if OK, or FALSE otherwise */
 		stats [TRILINOS_CCOLAMD_INFO1] = col ;
 		stats [TRILINOS_CCOLAMD_INFO2] = row ;
 		stats [TRILINOS_CCOLAMD_INFO3] = n_row ;
-		DEBUG1 (("row "ID" col "ID" out of bounds\n", row, col)) ;
+		DEBUG1 (("row " ID " col " ID " out of bounds\n", row, col)) ;
 		return (FALSE) ;
 	    }
 
@@ -2139,7 +2139,7 @@ PRIVATE Int init_rows_cols	/* returns TRUE if OK, or FALSE otherwise */
 		stats [TRILINOS_CCOLAMD_INFO1] = col ;
 		stats [TRILINOS_CCOLAMD_INFO2] = row ;
 		(stats [TRILINOS_CCOLAMD_INFO3]) ++ ;
-		DEBUG1 (("row "ID" col "ID" unsorted/duplicate\n", row, col)) ;
+		DEBUG1 (("row " ID " col " ID " unsorted/duplicate\n", row, col)) ;
 	    }
 
 	    if (Row [row].shared2.mark != col)
@@ -2366,7 +2366,7 @@ PRIVATE void init_scoring
 	    DENSE_DEGREE (knobs [TRILINOS_CCOLAMD_DENSE_COL], MIN (n_row, n_col)) ;
     }
 
-    DEBUG1 (("densecount: "ID" "ID"\n", dense_row_count, dense_col_count)) ;
+    DEBUG1 (("densecount: " ID " " ID "\n", dense_row_count, dense_col_count)) ;
     max_deg = 0 ;
 
     n_col2 = n_col ;
@@ -2403,7 +2403,7 @@ PRIVATE void init_scoring
 	    KILL_PRINCIPAL_COL (c) ;
 	}
     }
-    DEBUG1 (("trilinos_ccolamd: null columns killed: "ID"\n", n_col - n_col2)) ;
+    DEBUG1 (("trilinos_ccolamd: null columns killed: " ID "\n", n_col - n_col2)) ;
 
     /* === Kill dense columns =============================================== */
 
@@ -2433,7 +2433,7 @@ PRIVATE void init_scoring
 	    KILL_PRINCIPAL_COL (c) ;
 	}
     }
-    DEBUG1 (("Dense and null columns killed: "ID"\n", n_col - n_col2)) ;
+    DEBUG1 (("Dense and null columns killed: " ID "\n", n_col - n_col2)) ;
 
     /* === Kill dense and empty rows ======================================== */
 
@@ -2470,7 +2470,7 @@ PRIVATE void init_scoring
 	}
     }
     nnewlyempty_row = ne - nempty_row ;
-    DEBUG1 (("trilinos_ccolamd: Dense and null rows killed: "ID"\n", n_row - n_row2)) ;
+    DEBUG1 (("trilinos_ccolamd: Dense and null rows killed: " ID "\n", n_row - n_row2)) ;
 
     /* === Compute initial column scores ==================================== */
 
@@ -2513,7 +2513,7 @@ PRIVATE void init_scoring
 	{
 	    /* a newly-made null column (all rows in this col are "dense" */
 	    /* and have already been killed) */
-	    DEBUG1 (("Newly null killed: "ID"\n", c)) ;
+	    DEBUG1 (("Newly null killed: " ID "\n", c)) ;
 	    Col [c].shared2.order = -- head [CMEMBER (c)] ;
 	    --n_col2 ;
 	    dead_cols [CMEMBER (c)] ++ ;
@@ -2529,7 +2529,7 @@ PRIVATE void init_scoring
 	    Col [c].shared2.score = score ;
 	}
     }
-    DEBUG1 (("trilinos_ccolamd: Dense, null, and newly-null columns killed: "ID"\n",
+    DEBUG1 (("trilinos_ccolamd: Dense, null, and newly-null columns killed: " ID "\n",
     	n_col-n_col2)) ;
 
     /* At this point, all empty rows and columns are dead.  All live columns */
@@ -2666,7 +2666,7 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
     ngarbage = 0 ;
     current_set = -1 ;
     deadcol = 0 ;
-    DEBUG1 (("trilinos_ccolamd: Ordering, n_col2="ID"\n", n_col2)) ;
+    DEBUG1 (("trilinos_ccolamd: Ordering, n_col2=" ID "\n", n_col2)) ;
 
     for (row = 0 ; row < n_row ; row++)
     {
@@ -2695,7 +2695,7 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 	while ((k+deadcol) == cset_start [current_set+1])
 	{
 	    current_set++ ;
-	    DEBUG1 (("\n\n\n============ CSET: "ID"\n", current_set)) ;
+	    DEBUG1 (("\n\n\n============ CSET: " ID "\n", current_set)) ;
 	    k += deadcol ;	/* jump to start of next cset */
   	    deadcol = 0 ;	/* reset dead column count */
 
@@ -2725,7 +2725,7 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 
 		if (COL_IS_DEAD(col))
 		{
-		    DEBUG1 (("Column "ID" is dead\n", col)) ;
+		    DEBUG1 (("Column " ID " is dead\n", col)) ;
 		    /* count dense and null columns */
 		    if (Col [col].shared2.order != TRILINOS_CCOLAMDL_EMPTY)
 		    {
@@ -2738,7 +2738,7 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 		ASSERT (CMEMBER (col) == current_set) ;
 
 		score = Col [col].shared2.score ;
-		DEBUG1 (("Column "ID" is alive, score "ID"\n", col, score)) ;
+		DEBUG1 (("Column " ID " is alive, score " ID "\n", col, score)) ;
 
 		ASSERT (min_score >= 0) ;
 		ASSERT (min_score <= n_col) ;
@@ -2774,14 +2774,14 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 #ifndef NDEBUG
 	if (debug_step % 100 == 0)
 	{
-	    DEBUG2 (("\n...   Step k: "ID" out of n_col2: "ID"\n", k, n_col2)) ;
+	    DEBUG2 (("\n...   Step k: " ID " out of n_col2: " ID "\n", k, n_col2)) ;
 	}
 	else
 	{
-	    DEBUG3 (("\n------Step k: "ID" out of n_col2: "ID"\n", k, n_col2)) ;
+	    DEBUG3 (("\n------Step k: " ID " out of n_col2: " ID "\n", k, n_col2)) ;
 	}
 	debug_step++ ;
-	DEBUG1 (("start of step k="ID": ", k)) ;
+	DEBUG1 (("start of step k=" ID ": ", k)) ;
 	debug_deg_lists (n_row, n_col, Row, Col, head,
 	     min_score, cset_start [current_set+1]-(k+deadcol), max_deg) ;
 	debug_matrix (n_row, n_col, Row, Col, A) ;
@@ -2816,7 +2816,7 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 	pivot_col_thickness = Col [pivot_col].shared1.thickness ;
 	k += pivot_col_thickness ;
 	ASSERT (pivot_col_thickness > 0) ;
-	DEBUG3 (("Pivot col: "ID" thick "ID"\n", pivot_col,
+	DEBUG3 (("Pivot col: " ID " thick " ID "\n", pivot_col,
 		    pivot_col_thickness)) ;
 
 	/* === Garbage_collection, if necessary ============================= */
@@ -2857,7 +2857,7 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 	    /* get a row */
 	    row = *cp++ ;
 	    ASSERT (row >= 0 && row < n_row) ;
-	    DEBUG4 (("Pivcol pattern "ID" "ID"\n", ROW_IS_ALIVE (row), row)) ;
+	    DEBUG4 (("Pivcol pattern " ID " " ID "\n", ROW_IS_ALIVE (row), row)) ;
 	    /* skip if row is dead */
 	    if (ROW_IS_ALIVE (row))
 	    {
@@ -2880,12 +2880,12 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 			/* place column in pivot row */
 			A [pfree++] = col ;
 			pivot_row_degree += col_thickness ;
-			DEBUG4 (("\t\t\tNew live col in pivrow: "ID"\n",col)) ;
+			DEBUG4 (("\t\t\tNew live col in pivrow: " ID "\n",col)) ;
 		    }
 #ifndef NDEBUG
 		    if (col_thickness < 0 && COL_IS_ALIVE (col))
 		    {
-			DEBUG4 (("\t\t\tOld live col in pivrow: "ID"\n",col)) ;
+			DEBUG4 (("\t\t\tOld live col in pivrow: " ID "\n",col)) ;
 		    }
 #endif
 		}
@@ -2913,7 +2913,7 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 	{
 	    /* may be killing an already dead row */
 	    row = *cp++ ;
-	    DEBUG3 (("Kill row in pivot col: "ID"\n", row)) ;
+	    DEBUG3 (("Kill row in pivot col: " ID "\n", row)) ;
 	    ASSERT (row >= 0 && row < n_row) ;
             if (ROW_IS_ALIVE (row))
             {
@@ -2923,14 +2923,14 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
                     /* Row [row].front is a child of current front */
                     child = Row [row].front ;
                     Front_parent [child] = nfr ;
-                    DEBUG1 (("Front "ID" => front "ID", normal\n", child, nfr));
+                    DEBUG1 (("Front " ID " => front " ID ", normal\n", child, nfr));
                 }
                 else
                 {
                     /* This is an original row.  Keep track of which front
                      * is its parent in the row-merge tree. */
                     InFront [row] = nfr ;
-                    DEBUG1 (("Row "ID" => front "ID", normal\n", row, nfr)) ;
+                    DEBUG1 (("Row " ID " => front " ID ", normal\n", row, nfr)) ;
                 }
             }
 
@@ -2945,7 +2945,7 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 	{
 	    /* pick the "pivot" row arbitrarily (first row in col) */
 	    pivot_row = A [Col [pivot_col].start] ;
-	    DEBUG3 (("Pivotal row is "ID"\n", pivot_row)) ;
+	    DEBUG3 (("Pivotal row is " ID "\n", pivot_row)) ;
 	}
 	else
 	{
@@ -2988,7 +2988,7 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 	{
 	    col = *rp++ ;
 	    ASSERT (COL_IS_ALIVE (col) && col != pivot_col) ;
-	    DEBUG3 (("Col: "ID"\n", col)) ;
+	    DEBUG3 (("Col: " ID "\n", col)) ;
 
 	    /* clear tags used to construct pivot row pattern */
 	    col_thickness = -Col [col].shared1.thickness ;
@@ -3006,7 +3006,7 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 		cur_score = Col [col].shared2.score ;
 		prev_col = Col [col].shared3.prev ;
 		next_col = Col [col].shared4.degree_next ;
-		DEBUG3 (("        cur_score "ID" prev_col "ID" next_col "ID"\n",
+		DEBUG3 (("        cur_score " ID " prev_col " ID " next_col " ID "\n",
 			cur_score, prev_col, next_col)) ;
 		ASSERT (cur_score >= 0) ;
 		ASSERT (cur_score <= n_col) ;
@@ -3053,14 +3053,14 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 		/* absorb this row if the set difference becomes zero */
 		if (set_difference == 0 && aggressive)
 		{
-		    DEBUG3 (("aggressive absorption. Row: "ID"\n", row)) ;
+		    DEBUG3 (("aggressive absorption. Row: " ID "\n", row)) ;
 
                     if (Row [row].front != TRILINOS_CCOLAMDL_EMPTY)
                     {
                         /* Row [row].front is a child of current front. */
                         child = Row [row].front ;
                         Front_parent [child] = nfr ;
-                        DEBUG1 (("Front "ID" => front "ID", aggressive\n",
+                        DEBUG1 (("Front " ID " => front " ID ", aggressive\n",
                                     child, nfr)) ;
                     }
                     else
@@ -3068,7 +3068,7 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
                         /* this is an original row.  Keep track of which front
                          * assembles it, for the row-merge tree */
                         InFront [row] = nfr ;
-                        DEBUG1 (("Row "ID" => front "ID", aggressive\n",
+                        DEBUG1 (("Row " ID " => front " ID ", aggressive\n",
                                     row, nfr)) ;
                     }
 
@@ -3112,7 +3112,7 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 	    new_cp = cp ;
 	    cp_end = cp + Col [col].length ;
 
-	    DEBUG4 (("Adding set diffs for Col: "ID".\n", col)) ;
+	    DEBUG4 (("Adding set diffs for Col: " ID ".\n", col)) ;
 
 	    while (cp < cp_end)
 	    {
@@ -3123,10 +3123,10 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 		/* skip if dead */
 		if (ROW_IS_MARKED_DEAD (row_mark))
 		{
-		    DEBUG4 ((" Row "ID", dead\n", row)) ;
+		    DEBUG4 ((" Row " ID ", dead\n", row)) ;
 		    continue ;
 		}
-		DEBUG4 ((" Row "ID", set diff "ID"\n", row, row_mark-tag_mark));
+		DEBUG4 ((" Row " ID ", set diff " ID "\n", row, row_mark-tag_mark));
                 ASSERT (row_mark >= tag_mark) ;
 		/* compact the column */
 		*new_cp++ = row ;
@@ -3145,7 +3145,7 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 
 	    if (Col [col].length == 0 && CMEMBER (col) == current_set)
 	    {
-		DEBUG4 (("further mass elimination. Col: "ID"\n", col)) ;
+		DEBUG4 (("further mass elimination. Col: " ID "\n", col)) ;
 		/* nothing left but the pivot row in this column */
 		KILL_PRINCIPAL_COL (col) ;
 		pivot_row_degree -= Col [col].shared1.thickness ;
@@ -3167,7 +3167,7 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 	    {
 		/* === Prepare for supercolumn detection ==================== */
 
-		DEBUG4 (("Preparing supercol detection for Col: "ID".\n", col));
+		DEBUG4 (("Preparing supercol detection for Col: " ID ".\n", col));
 
 		/* save score so far */
 		Col [col].shared2.score = cur_score ;
@@ -3175,7 +3175,7 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 		/* add column to hash table, for supercolumn detection */
 		hash %= n_col + 1 ;
 
-		DEBUG4 ((" Hash = "ID", n_col = "ID".\n", hash, n_col)) ;
+		DEBUG4 ((" Hash = " ID ", n_col = " ID ".\n", hash, n_col)) ;
 		ASSERT (((Int) hash) <= n_col) ;
 
 		head_column = head [hash] ;
@@ -3214,7 +3214,7 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 
 	/* === Kill the pivotal column ====================================== */
 
-	DEBUG1 ((" KILLING column detect supercols "ID" \n", pivot_col)) ;
+	DEBUG1 ((" KILLING column detect supercols " ID " \n", pivot_col)) ;
 	KILL_PRINCIPAL_COL (pivot_col) ;
 
 	/* add columns to column list of front */
@@ -3322,7 +3322,7 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 	Front_parent [nfr] = TRILINOS_CCOLAMDL_EMPTY ;
 
 	pivot_row_thickness -= pivot_col_thickness ;
-	DEBUG1 (("Front "ID" Pivot_row_thickness after pivot cols elim: "ID"\n",
+	DEBUG1 (("Front " ID " Pivot_row_thickness after pivot cols elim: " ID "\n",
 	     nfr, pivot_row_thickness)) ;
 	pivot_row_thickness = MAX (0, pivot_row_thickness) ;
 
@@ -3340,12 +3340,12 @@ PRIVATE Int find_ordering	/* return the number of garbage collections */
 	    Row [pivot_row].thickness = pivot_row_thickness ;
 	    Row [pivot_row].front = nfr ;
 	    /* pivot row is no longer dead */
-	    DEBUG1 (("Resurrect Pivot_row "ID" deg: "ID"\n",
+	    DEBUG1 (("Resurrect Pivot_row " ID " deg: " ID "\n",
 			pivot_row, pivot_row_degree)) ;
 	}
 
 #ifndef NDEBUG
-	DEBUG1 (("Front "ID" : "ID" "ID" "ID" ", nfr,
+	DEBUG1 (("Front " ID " : " ID " " ID " " ID " ", nfr,
 		 Front_npivcol [nfr], Front_nrows [nfr], Front_ncols [nfr])) ;
 	DEBUG1 ((" cols:[ ")) ;
 	debug_d = 0 ;
@@ -3782,13 +3782,13 @@ PRIVATE void print_report
 
 	    PRINTF(("Matrix has unsorted or duplicate row indices.\n")) ;
 
-	    PRINTF(("%s: duplicate or out-of-order row indices:    "ID"\n",
+	    PRINTF(("%s: duplicate or out-of-order row indices:    " ID "\n",
 		    method, i3)) ;
 
-	    PRINTF(("%s: last seen duplicate or out-of-order row:  "ID"\n",
+	    PRINTF(("%s: last seen duplicate or out-of-order row:  " ID "\n",
 		    method, INDEX (i2))) ;
 
-	    PRINTF(("%s: last seen in column:                      "ID"",
+	    PRINTF(("%s: last seen in column:                      " ID "",
 		    method, INDEX (i1))) ;
 
 	    /* no break - fall through to next case instead */
@@ -3797,13 +3797,13 @@ PRIVATE void print_report
 
 	    PRINTF(("\n")) ;
 
- 	    PRINTF(("%s: number of dense or empty rows ignored:    "ID"\n",
+ 	    PRINTF(("%s: number of dense or empty rows ignored:    " ID "\n",
 		    method, stats [TRILINOS_CCOLAMD_DENSE_ROW])) ;
 
-	    PRINTF(("%s: number of dense or empty columns ignored: "ID"\n",
+	    PRINTF(("%s: number of dense or empty columns ignored: " ID "\n",
 		    method, stats [TRILINOS_CCOLAMD_DENSE_COL])) ;
 
-	    PRINTF(("%s: number of garbage collections performed:  "ID"\n",
+	    PRINTF(("%s: number of garbage collections performed:  " ID "\n",
 		    method, stats [TRILINOS_CCOLAMD_DEFRAG_COUNT])) ;
 	    break ;
 
@@ -3819,41 +3819,41 @@ PRIVATE void print_report
 
 	case TRILINOS_CCOLAMD_ERROR_nrow_negative:
 
-	    PRINTF(("Invalid number of rows ("ID").\n", i1)) ;
+	    PRINTF(("Invalid number of rows (" ID ").\n", i1)) ;
 	    break ;
 
 	case TRILINOS_CCOLAMD_ERROR_ncol_negative:
 
-	    PRINTF(("Invalid number of columns ("ID").\n", i1)) ;
+	    PRINTF(("Invalid number of columns (" ID ").\n", i1)) ;
 	    break ;
 
 	case TRILINOS_CCOLAMD_ERROR_nnz_negative:
 
-	    PRINTF(("Invalid number of nonzero entries ("ID").\n", i1)) ;
+	    PRINTF(("Invalid number of nonzero entries (" ID ").\n", i1)) ;
 	    break ;
 
 	case TRILINOS_CCOLAMD_ERROR_p0_nonzero:
 
-	    PRINTF(("Invalid column pointer, p [0] = "ID", must be 0.\n", i1)) ;
+	    PRINTF(("Invalid column pointer, p [0] = " ID ", must be 0.\n", i1)) ;
 	    break ;
 
 	case TRILINOS_CCOLAMD_ERROR_A_too_small:
 
 	    PRINTF(("Array A too small.\n")) ;
-	    PRINTF(("        Need Alen >= "ID", but given only Alen = "ID".\n",
+	    PRINTF(("        Need Alen >= " ID ", but given only Alen = " ID ".\n",
 		    i1, i2)) ;
 	    break ;
 
 	case TRILINOS_CCOLAMD_ERROR_col_length_negative:
 
-	    PRINTF(("Column "ID" has a negative number of entries ("ID").\n",
+	    PRINTF(("Column " ID " has a negative number of entries (" ID ").\n",
 		    INDEX (i1), i2)) ;
 	    break ;
 
 	case TRILINOS_CCOLAMD_ERROR_row_index_out_of_bounds:
 
-	    PRINTF(("Row index (row "ID") out of bounds ("ID" to "ID") in"
-		    "column "ID".\n", INDEX (i2), INDEX (0), INDEX (i3-1),
+	    PRINTF(("Row index (row " ID ") out of bounds (" ID " to " ID ") in"
+		    "column " ID ".\n", INDEX (i2), INDEX (0), INDEX (i3-1),
 		    INDEX (i1))) ;
 	    break ;
 
@@ -3960,17 +3960,17 @@ GLOBAL void TRILINOS_CCOLAMD_fsize
 	    dr = (double) r ;
 	    dc = (double) c ;
 	    frsize = (INT_OVERFLOW (dr * dc)) ?  Int_MAX : (r * c) ;
-	    DEBUG1 ((""ID" : npiv "ID" size "ID" parent "ID" ",
+	    DEBUG1 (("" ID " : npiv " ID " size " ID " parent " ID " ",
 		j, Npiv [j], frsize, parent)) ;
 	    Fsize [j] = MAX (Fsize [j], frsize) ;
-	    DEBUG1 (("Fsize [j = "ID"] = "ID"\n", j, Fsize [j])) ;
+	    DEBUG1 (("Fsize [j = " ID "] = " ID "\n", j, Fsize [j])) ;
 	    if (parent != TRILINOS_CCOLAMDL_EMPTY)
 	    {
 		/* find the maximum frontsize of self and children */
 		ASSERT (Npiv [parent] > 0) ;
 		ASSERT (parent > j) ;
 		Fsize [parent] = MAX (Fsize [parent], Fsize [j]) ;
-		DEBUG1 (("Fsize [parent = "ID"] = "ID"\n",
+		DEBUG1 (("Fsize [parent = " ID "] = " ID "\n",
 		    parent, Fsize [parent]));
 	    }
 	}
@@ -4047,8 +4047,8 @@ GLOBAL void TRILINOS_CCOLAMD_postorder
 	{
 	    if (Nv [j] > 0)
 	    {
-		DEBUG1 ((""ID" :  nels "ID" npiv "ID" size "ID
-		    " parent "ID" maxfr "ID"\n", j, nels,
+		DEBUG1 (("" ID " :  nels " ID " npiv " ID " size "ID
+		    " parent " ID " maxfr " ID "\n", j, nels,
 		    Nv [j], Fsize [j], Parent [j], Fsize [j])) ;
 		/* this is an element */
 		/* dump the link list of children */
@@ -4079,11 +4079,11 @@ GLOBAL void TRILINOS_CCOLAMD_postorder
 
 #ifndef NDEBUG
 	    Int nchild ;
-	    DEBUG1 (("Before partial sort, element "ID"\n", i)) ;
+	    DEBUG1 (("Before partial sort, element " ID "\n", i)) ;
 	    nchild = 0 ;
 	    for (f = Child [i] ; f != TRILINOS_CCOLAMDL_EMPTY ; f = Sibling [f])
 	    {
-		DEBUG1 (("      f: "ID"  size: "ID"\n", f, Fsize [f])) ;
+		DEBUG1 (("      f: " ID "  size: " ID "\n", f, Fsize [f])) ;
 		nchild++ ;
 	    }
 #endif
@@ -4108,7 +4108,7 @@ GLOBAL void TRILINOS_CCOLAMD_postorder
 
 	    fnext = Sibling [bigf] ;
 
-	    DEBUG1 (("bigf "ID" maxfrsize "ID" bigfprev "ID" fnext "ID
+	    DEBUG1 (("bigf " ID " maxfrsize " ID " bigfprev " ID " fnext " ID
 		" fprev " ID"\n", bigf, maxfrsize, bigfprev, fnext, fprev)) ;
 
 	    if (fnext != TRILINOS_CCOLAMDL_EMPTY)
@@ -4132,10 +4132,10 @@ GLOBAL void TRILINOS_CCOLAMD_postorder
 	    }
 
 #ifndef NDEBUG
-	    DEBUG1 (("After partial sort, element "ID"\n", i)) ;
+	    DEBUG1 (("After partial sort, element " ID "\n", i)) ;
 	    for (f = Child [i] ; f != TRILINOS_CCOLAMDL_EMPTY ; f = Sibling [f])
 	    {
-		DEBUG1 (("        "ID"  "ID"\n", f, Fsize [f])) ;
+		DEBUG1 (("        " ID "  " ID "\n", f, Fsize [f])) ;
 		nchild-- ;
 	    }
 #endif
@@ -4159,7 +4159,7 @@ GLOBAL void TRILINOS_CCOLAMD_postorder
 	    || (CMEMBER (Front_cols [Parent [i]]) != CMEMBER (Front_cols [i])))
 	    && Nv [i] > 0)
 	{
-	    DEBUG1 (("Root of assembly tree "ID"\n", i)) ;
+	    DEBUG1 (("Root of assembly tree " ID "\n", i)) ;
 	    k = TRILINOS_CCOLAMD_post_tree (i, k, Child, Sibling, Order, Stack) ;
 	}
     }
@@ -4220,7 +4220,7 @@ GLOBAL Int TRILINOS_CCOLAMD_post_tree
     {
 	/* get head of stack */
 	i = Stack [head] ;
-	DEBUG1 (("head of stack "ID" \n", i)) ;
+	DEBUG1 (("head of stack " ID " \n", i)) ;
 
 	if (Child [i] != TRILINOS_CCOLAMDL_EMPTY)
 	{
@@ -4237,7 +4237,7 @@ GLOBAL Int TRILINOS_CCOLAMD_post_tree
 	    {
 		ASSERT (h > 0) ;
 		Stack [h--] = f ;
-		DEBUG1 (("push "ID" on stack\n", f)) ;
+		DEBUG1 (("push " ID " on stack\n", f)) ;
 	    }
 	    ASSERT (Stack [h] == i) ;
 
@@ -4249,7 +4249,7 @@ GLOBAL Int TRILINOS_CCOLAMD_post_tree
 	    /* the children of i (if there were any) are already ordered */
 	    /* remove i from the stack and order it.  Front i is kth front */
 	    head-- ;
-	    DEBUG1 (("pop "ID" order "ID"\n", i, k)) ;
+	    DEBUG1 (("pop " ID " order " ID "\n", i, k)) ;
 	    Order [i] = k++ ;
 	}
 
@@ -4408,7 +4408,7 @@ PRIVATE void debug_deg_lists
 	return ;
     }
     have = 0 ;
-    DEBUG4 (("Degree lists: "ID"\n", min_score)) ;
+    DEBUG4 (("Degree lists: " ID "\n", min_score)) ;
     for (deg = 0 ; deg <= n_col ; deg++)
     {
 	col = head [deg] ;
@@ -4420,14 +4420,14 @@ PRIVATE void debug_deg_lists
 	ASSERT (Col [col].shared3.prev == TRILINOS_CCOLAMDL_EMPTY) ;
 	while (col != TRILINOS_CCOLAMDL_EMPTY)
 	{
-	    DEBUG4 ((" "ID"", col)) ;
+	    DEBUG4 ((" " ID "", col)) ;
 	    have += Col [col].shared1.thickness ;
 	    ASSERT (COL_IS_ALIVE (col)) ;
 	    col = Col [col].shared4.degree_next ;
 	}
 	DEBUG4 (("\n")) ;
     }
-    DEBUG4 (("should "ID" have "ID"\n", should, have)) ;
+    DEBUG4 (("should " ID " have " ID "\n", should, have)) ;
     ASSERT (should == have) ;
 
     /* === Check the row degrees ============================================ */
@@ -4518,13 +4518,13 @@ PRIVATE void debug_matrix
     DEBUG3 (("DUMP MATRIX:\n")) ;
     for (r = 0 ; r < n_row ; r++)
     {
-	DEBUG3 (("Row "ID" alive? "ID"\n", r, ROW_IS_ALIVE (r))) ;
+	DEBUG3 (("Row " ID " alive? " ID "\n", r, ROW_IS_ALIVE (r))) ;
 	if (ROW_IS_DEAD (r))
 	{
 	    continue ;
 	}
 
-	DEBUG3 (("start "ID" length "ID" degree "ID"\nthickness "ID"\n",
+	DEBUG3 (("start " ID " length " ID " degree " ID "\nthickness " ID "\n",
 		Row [r].start, Row [r].length, Row [r].shared1.degree,
 		Row [r].thickness)) ;
 
@@ -4533,18 +4533,18 @@ PRIVATE void debug_matrix
 	while (rp < rp_end)
 	{
 	    c = *rp++ ;
-	    DEBUG4 (("	"ID" col "ID"\n", COL_IS_ALIVE (c), c)) ;
+	    DEBUG4 (("	" ID " col " ID "\n", COL_IS_ALIVE (c), c)) ;
 	}
     }
 
     for (c = 0 ; c < n_col ; c++)
     {
-	DEBUG3 (("Col "ID" alive? "ID"\n", c, COL_IS_ALIVE (c))) ;
+	DEBUG3 (("Col " ID " alive? " ID "\n", c, COL_IS_ALIVE (c))) ;
 	if (COL_IS_DEAD (c))
 	{
 	    continue ;
 	}
-	DEBUG3 (("start "ID" length "ID" shared1 "ID" shared2 "ID"\n",
+	DEBUG3 (("start " ID " length " ID " shared1 " ID " shared2 " ID "\n",
 		Col [c].start, Col [c].length,
 		Col [c].shared1.thickness, Col [c].shared2.score)) ;
 	cp = &A [Col [c].start] ;
@@ -4552,7 +4552,7 @@ PRIVATE void debug_matrix
 	while (cp < cp_end)
 	{
 	    r = *cp++ ;
-	    DEBUG4 (("	"ID" row "ID"\n", ROW_IS_ALIVE (r), r)) ;
+	    DEBUG4 (("	" ID " row " ID "\n", ROW_IS_ALIVE (r), r)) ;
 	}
     }
 }
@@ -4609,14 +4609,14 @@ PRIVATE void trilinos_ccolamd_get_debug
     debug_file = fopen ("debug", "r") ;
     if (debug_file)
     {
-	(void) fscanf (debug_file, ""ID"", &trilinos_ccolamd_debug) ;
+	(void) fscanf (debug_file, "" ID "", &trilinos_ccolamd_debug) ;
 	(void) fclose (debug_file) ;
     }
 
     DEBUG0 ((":")) ;
-    DEBUG1 (("%s: debug version, D = "ID" (THIS WILL BE SLOW!)\n",
+    DEBUG1 (("%s: debug version, D = " ID " (THIS WILL BE SLOW!)\n",
     	method, trilinos_ccolamd_debug)) ;
-    DEBUG1 ((" Debug printing level: "ID"\n", trilinos_ccolamd_debug)) ;
+    DEBUG1 ((" Debug printing level: " ID "\n", trilinos_ccolamd_debug)) ;
 }
 
 #endif

@@ -604,7 +604,7 @@ GLOBAL void TRILINOS_AMD_2
     }
     dense = MAX (16, dense) ;
     dense = MIN (n,  dense) ;
-    TRILINOS_AMD_DEBUG1 (("\n\nAMD (debug), alpha %g, aggr. "ID"\n",
+    TRILINOS_AMD_DEBUG1 (("\n\nAMD (debug), alpha %g, aggr. " ID "\n",
 	alpha, aggressive)) ;
 
     for (i = 0 ; i < n ; i++)
@@ -622,7 +622,7 @@ GLOBAL void TRILINOS_AMD_2
     }
 
 #ifndef NDEBUG
-    TRILINOS_AMD_DEBUG1 (("\n======Nel "ID" initial\n", nel)) ;
+    TRILINOS_AMD_DEBUG1 (("\n======Nel " ID " initial\n", nel)) ;
     TRILINOS_AMD_dump (n, Pe, Iw, Len, iwlen, pfree, Nv, Next, Last,
 		Head, Elen, Degree, W, -1) ;
 #endif
@@ -667,7 +667,7 @@ GLOBAL void TRILINOS_AMD_2
 	     * version does not have this option.
 	     * ------------------------------------------------------------- */
 
-	    TRILINOS_AMD_DEBUG1 (("Dense node "ID" degree "ID"\n", i, deg)) ;
+	    TRILINOS_AMD_DEBUG1 (("Dense node " ID " degree " ID "\n", i, deg)) ;
 	    ndense++ ;
 	    Nv [i] = 0 ;		/* do not postorder this node */
 	    Elen [i] = TRILINOS_AMD_EMPTY ;
@@ -699,7 +699,7 @@ GLOBAL void TRILINOS_AMD_2
     {
 
 #ifndef NDEBUG
-	TRILINOS_AMD_DEBUG1 (("\n======Nel "ID"\n", nel)) ;
+	TRILINOS_AMD_DEBUG1 (("\n======Nel " ID "\n", nel)) ;
 	if (TRILINOS_AMD_debug >= 2)
 	{
 	    TRILINOS_AMD_dump (n, Pe, Iw, Len, iwlen, pfree, Nv, Next,
@@ -723,7 +723,7 @@ GLOBAL void TRILINOS_AMD_2
 	}
 	mindeg = deg ;
 	ASSERT (me >= 0 && me < n) ;
-	TRILINOS_AMD_DEBUG1 (("=================me: "ID"\n", me)) ;
+	TRILINOS_AMD_DEBUG1 (("=================me: " ID "\n", me)) ;
 
 	/* ----------------------------------------------------------------- */
 	/* remove chosen variable from link list */
@@ -831,7 +831,7 @@ GLOBAL void TRILINOS_AMD_2
 		    e = me ;
 		    pj = p ;
 		    ln = slenme ;
-		    TRILINOS_AMD_DEBUG2 (("Search sv: "ID" "ID" "ID"\n", me,pj,ln)) ;
+		    TRILINOS_AMD_DEBUG2 (("Search sv: " ID " " ID " " ID "\n", me,pj,ln)) ;
 		}
 		else
 		{
@@ -840,7 +840,7 @@ GLOBAL void TRILINOS_AMD_2
 		    ASSERT (e >= 0 && e < n) ;
 		    pj = Pe [e] ;
 		    ln = Len [e] ;
-		    TRILINOS_AMD_DEBUG2 (("Search element e "ID" in me "ID"\n", e,me)) ;
+		    TRILINOS_AMD_DEBUG2 (("Search element e " ID " in me " ID "\n", e,me)) ;
 		    ASSERT (Elen [e] < TRILINOS_AMD_EMPTY && W [e] > 0 && pj >= 0) ;
 		}
 		ASSERT (ln >= 0 && (ln == 0 || (pj >= 0 && pj < iwlen))) ;
@@ -857,7 +857,7 @@ GLOBAL void TRILINOS_AMD_2
 		    i = Iw [pj++] ;
 		    ASSERT (i >= 0 && i < n && (i == me || Elen [i] >= TRILINOS_AMD_EMPTY));
 		    nvi = Nv [i] ;
-		    TRILINOS_AMD_DEBUG2 ((": "ID" "ID" "ID" "ID"\n",
+		    TRILINOS_AMD_DEBUG2 ((": " ID " " ID " " ID " " ID "\n",
 				i, Elen [i], Nv [i], wflg)) ;
 
 		    if (nvi > 0)
@@ -912,7 +912,7 @@ GLOBAL void TRILINOS_AMD_2
 				j = FLIP (Iw [psrc++]) ;
 				if (j >= 0)
 				{
-				    TRILINOS_AMD_DEBUG2 (("Got object j: "ID"\n", j)) ;
+				    TRILINOS_AMD_DEBUG2 (("Got object j: " ID "\n", j)) ;
 				    Iw [pdst] = Pe [j] ;
 				    Pe [j] = pdst++ ;
 				    lenj = Len [j] ;
@@ -946,7 +946,7 @@ GLOBAL void TRILINOS_AMD_2
 			degme += nvi ;
 			Nv [i] = -nvi ;
 			Iw [pfree++] = i ;
-			TRILINOS_AMD_DEBUG2 (("     s: "ID"     nv "ID"\n", i, Nv [i]));
+			TRILINOS_AMD_DEBUG2 (("     s: " ID "     nv " ID "\n", i, Nv [i]));
 
 			/* ------------------------------------------------- */
 			/* remove variable i from degree link list */
@@ -974,7 +974,7 @@ GLOBAL void TRILINOS_AMD_2
 		{
 		    /* set tree pointer and flag to indicate element e is
 		     * absorbed into new element me (the parent of e is me) */
-		    TRILINOS_AMD_DEBUG1 ((" Element "ID" => "ID"\n", e, me)) ;
+		    TRILINOS_AMD_DEBUG1 ((" Element " ID " => " ID "\n", e, me)) ;
 		    Pe [e] = FLIP (me) ;
 		    W [e] = 0 ;
 		}
@@ -998,8 +998,8 @@ GLOBAL void TRILINOS_AMD_2
 	 * diagonal part). */
 
 #ifndef NDEBUG
-	TRILINOS_AMD_DEBUG2 (("New element structure: length= "ID"\n", pme2-pme1+1)) ;
-	for (pme = pme1 ; pme <= pme2 ; pme++) TRILINOS_AMD_DEBUG3 ((" "ID"", Iw[pme]));
+	TRILINOS_AMD_DEBUG2 (("New element structure: length= " ID "\n", pme2-pme1+1)) ;
+	for (pme = pme1 ; pme <= pme2 ; pme++) TRILINOS_AMD_DEBUG3 ((" " ID "", Iw[pme]));
 	TRILINOS_AMD_DEBUG3 (("\n")) ;
 #endif
 
@@ -1036,7 +1036,7 @@ GLOBAL void TRILINOS_AMD_2
 	    i = Iw [pme] ;
 	    ASSERT (i >= 0 && i < n) ;
 	    eln = Elen [i] ;
-	    TRILINOS_AMD_DEBUG3 ((""ID" Elen "ID": \n", i, eln)) ;
+	    TRILINOS_AMD_DEBUG3 (("" ID " Elen " ID ": \n", i, eln)) ;
 	    if (eln > 0)
 	    {
 		/* note that Nv [i] has been negated to denote i in Lme: */
@@ -1048,7 +1048,7 @@ GLOBAL void TRILINOS_AMD_2
 		    e = Iw [p] ;
 		    ASSERT (e >= 0 && e < n) ;
 		    we = W [e] ;
-		    TRILINOS_AMD_DEBUG4 (("    e "ID" we "ID" ", e, we)) ;
+		    TRILINOS_AMD_DEBUG4 (("    e " ID " we " ID " ", e, we)) ;
 		    if (we >= wflg)
 		    {
 			/* unabsorbed element e has been seen in this loop */
@@ -1084,7 +1084,7 @@ GLOBAL void TRILINOS_AMD_2
 	{
 	    i = Iw [pme] ;
 	    ASSERT (i >= 0 && i < n && Nv [i] < 0 && Elen [i] >= 0) ;
-	    TRILINOS_AMD_DEBUG2 (("Updating: i "ID" "ID" "ID"\n", i, Elen[i], Len [i]));
+	    TRILINOS_AMD_DEBUG2 (("Updating: i " ID " " ID " " ID "\n", i, Elen[i], Len [i]));
 	    p1 = Pe [i] ;
 	    p2 = p1 + Elen [i] - 1 ;
 	    pn = p1 ;
@@ -1114,12 +1114,12 @@ GLOBAL void TRILINOS_AMD_2
 			    deg += dext ;
 			    Iw [pn++] = e ;
 			    hash += e ;
-			    TRILINOS_AMD_DEBUG4 ((" e: "ID" hash = "ID"\n",e,hash)) ;
+			    TRILINOS_AMD_DEBUG4 ((" e: " ID " hash = " ID "\n",e,hash)) ;
 			}
 			else
 			{
 			    /* external degree of e is zero, absorb e into me*/
-			    TRILINOS_AMD_DEBUG1 ((" Element "ID" =>"ID" (aggressive)\n",
+			    TRILINOS_AMD_DEBUG1 ((" Element " ID " =>" ID " (aggressive)\n",
 				e, me)) ;
 			    ASSERT (dext == 0) ;
 			    Pe [e] = FLIP (me) ;
@@ -1143,7 +1143,7 @@ GLOBAL void TRILINOS_AMD_2
 			deg += dext ;
 			Iw [pn++] = e ;
 			hash += e ;
-			TRILINOS_AMD_DEBUG4 (("	e: "ID" hash = "ID"\n",e,hash)) ;
+			TRILINOS_AMD_DEBUG4 (("	e: " ID " hash = " ID "\n",e,hash)) ;
 		    }
 		}
 	    }
@@ -1172,7 +1172,7 @@ GLOBAL void TRILINOS_AMD_2
 		    deg += nvj ;
 		    Iw [pn++] = j ;
 		    hash += j ;
-		    TRILINOS_AMD_DEBUG4 (("  s: "ID" hash "ID" Nv[j]= "ID"\n",
+		    TRILINOS_AMD_DEBUG4 (("  s: " ID " hash " ID " Nv[j]= " ID "\n",
 				j, hash, nvj)) ;
 		}
 	    }
@@ -1212,7 +1212,7 @@ GLOBAL void TRILINOS_AMD_2
 		 * flop count analysis.  It also means that the post-ordering
 		 * is not an exact elimination tree post-ordering. */
 
-		TRILINOS_AMD_DEBUG1 (("  MASS i "ID" => parent e "ID"\n", i, me)) ;
+		TRILINOS_AMD_DEBUG1 (("  MASS i " ID " => parent e " ID "\n", i, me)) ;
 		Pe [i] = FLIP (me) ;
 		nvi = -Nv [i] ;
 		degme -= nvi ;
@@ -1304,7 +1304,7 @@ GLOBAL void TRILINOS_AMD_2
 	{
 	    i = Iw [pme] ;
 	    ASSERT (i >= 0 && i < n) ;
-	    TRILINOS_AMD_DEBUG2 (("Consider i "ID" nv "ID"\n", i, Nv [i])) ;
+	    TRILINOS_AMD_DEBUG2 (("Consider i " ID " nv " ID "\n", i, Nv [i])) ;
 	    if (Nv [i] < 0)
 	    {
 		/* i is a principal variable in Lme */
@@ -1345,7 +1345,7 @@ GLOBAL void TRILINOS_AMD_2
 		*/
 
 		ASSERT (i >= TRILINOS_AMD_EMPTY && i < n) ;
-		TRILINOS_AMD_DEBUG2 (("----i "ID" hash "ID"\n", i, hash)) ;
+		TRILINOS_AMD_DEBUG2 (("----i " ID " hash " ID "\n", i, hash)) ;
 
 		while (i != TRILINOS_AMD_EMPTY && Next [i] != TRILINOS_AMD_EMPTY)
 		{
@@ -1381,7 +1381,7 @@ GLOBAL void TRILINOS_AMD_2
 			/* check if j and i have identical nonzero pattern */
 			/* ------------------------------------------------- */
 
-			TRILINOS_AMD_DEBUG3 (("compare i "ID" and j "ID"\n", i,j)) ;
+			TRILINOS_AMD_DEBUG3 (("compare i " ID " and j " ID "\n", i,j)) ;
 
 			/* check if i and j have the same Len and Elen */
 			ASSERT (Len [j] >= 0 && Elen [j] >= 0) ;
@@ -1399,7 +1399,7 @@ GLOBAL void TRILINOS_AMD_2
 			    /* found it!  j can be absorbed into i */
 			    /* --------------------------------------------- */
 
-			    TRILINOS_AMD_DEBUG1 (("found it! j "ID" => i "ID"\n", j,i));
+			    TRILINOS_AMD_DEBUG1 (("found it! j " ID " => i " ID "\n", j,i));
 			    Pe [j] = FLIP (i) ;
 			    /* both Nv [i] and Nv [j] are negated since they */
 			    /* are in Lme, and the absolute values of each */
@@ -1448,7 +1448,7 @@ GLOBAL void TRILINOS_AMD_2
 	    i = Iw [pme] ;
 	    ASSERT (i >= 0 && i < n) ;
 	    nvi = -Nv [i] ;
-	    TRILINOS_AMD_DEBUG3 (("Restore i "ID" "ID"\n", i, nvi)) ;
+	    TRILINOS_AMD_DEBUG3 (("Restore i " ID " " ID "\n", i, nvi)) ;
 	    if (nvi > 0)
 	    {
 		/* i is a principal variable in Lme */
@@ -1495,7 +1495,7 @@ GLOBAL void TRILINOS_AMD_2
 /* FINALIZE THE NEW ELEMENT */
 /* ========================================================================= */
 
-	TRILINOS_AMD_DEBUG2 (("ME = "ID" DONE\n", me)) ;
+	TRILINOS_AMD_DEBUG2 (("ME = " ID " DONE\n", me)) ;
 	Nv [me] = nvpiv ;
 	/* save the length of the list for the new element me */
 	Len [me] = p - pme1 ;
@@ -1542,10 +1542,10 @@ GLOBAL void TRILINOS_AMD_2
 	}
 
 #ifndef NDEBUG
-	TRILINOS_AMD_DEBUG2 (("finalize done nel "ID" n "ID"\n   ::::\n", nel, n)) ;
+	TRILINOS_AMD_DEBUG2 (("finalize done nel " ID " n " ID "\n   ::::\n", nel, n)) ;
 	for (pme = Pe [me] ; pme <= Pe [me] + Len [me] - 1 ; pme++)
 	{
-	      TRILINOS_AMD_DEBUG3 ((" "ID"", Iw [pme])) ;
+	      TRILINOS_AMD_DEBUG3 ((" " ID "", Iw [pme])) ;
 	}
 	TRILINOS_AMD_DEBUG3 (("\n")) ;
 #endif
@@ -1649,13 +1649,13 @@ GLOBAL void TRILINOS_AMD_2
     TRILINOS_AMD_DEBUG2 (("\nTree:\n")) ;
     for (i = 0 ; i < n ; i++)
     {
-	TRILINOS_AMD_DEBUG2 ((" "ID" parent: "ID"   ", i, Pe [i])) ;
+	TRILINOS_AMD_DEBUG2 ((" " ID " parent: " ID "   ", i, Pe [i])) ;
 	ASSERT (Pe [i] >= TRILINOS_AMD_EMPTY && Pe [i] < n) ;
 	if (Nv [i] > 0)
 	{
 	    /* this is an element */
 	    e = i ;
-	    TRILINOS_AMD_DEBUG2 ((" element, size is "ID"\n", Elen [i])) ;
+	    TRILINOS_AMD_DEBUG2 ((" element, size is " ID "\n", Elen [i])) ;
 	    ASSERT (Elen [e] > 0) ;
 	}
 	TRILINOS_AMD_DEBUG2 (("\n")) ;
@@ -1665,7 +1665,7 @@ GLOBAL void TRILINOS_AMD_2
     {
 	if (Nv [e] > 0)
 	{
-	    TRILINOS_AMD_DEBUG3 (("Element e= "ID" size "ID" nv "ID" \n", e,
+	    TRILINOS_AMD_DEBUG3 (("Element e= " ID " size " ID " nv " ID " \n", e,
 		Elen [e], Nv [e])) ;
 	}
     }
@@ -1675,10 +1675,10 @@ GLOBAL void TRILINOS_AMD_2
 	Int cnt ;
 	if (Nv [i] == 0)
 	{
-	    TRILINOS_AMD_DEBUG3 (("i unordered: "ID"\n", i)) ;
+	    TRILINOS_AMD_DEBUG3 (("i unordered: " ID "\n", i)) ;
 	    j = Pe [i] ;
 	    cnt = 0 ;
-	    TRILINOS_AMD_DEBUG3 (("  j: "ID"\n", j)) ;
+	    TRILINOS_AMD_DEBUG3 (("  j: " ID "\n", j)) ;
 	    if (j == TRILINOS_AMD_EMPTY)
 	    {
 		TRILINOS_AMD_DEBUG3 (("	i is a dense variable\n")) ;
@@ -1688,14 +1688,14 @@ GLOBAL void TRILINOS_AMD_2
 		ASSERT (j >= 0 && j < n) ;
 		while (Nv [j] == 0)
 		{
-		    TRILINOS_AMD_DEBUG3 (("	j : "ID"\n", j)) ;
+		    TRILINOS_AMD_DEBUG3 (("	j : " ID "\n", j)) ;
 		    j = Pe [j] ;
-		    TRILINOS_AMD_DEBUG3 (("	j:: "ID"\n", j)) ;
+		    TRILINOS_AMD_DEBUG3 (("	j:: " ID "\n", j)) ;
 		    cnt++ ;
 		    if (cnt > n) break ;
 		}
 		e = j ;
-		TRILINOS_AMD_DEBUG3 (("	got to e: "ID"\n", e)) ;
+		TRILINOS_AMD_DEBUG3 (("	got to e: " ID "\n", e)) ;
 	    }
 	}
     }
@@ -1717,10 +1717,10 @@ GLOBAL void TRILINOS_AMD_2
 	     * was selected as pivot.
 	     * ------------------------------------------------------------- */
 
-	    TRILINOS_AMD_DEBUG1 (("Path compression, i unordered: "ID"\n", i)) ;
+	    TRILINOS_AMD_DEBUG1 (("Path compression, i unordered: " ID "\n", i)) ;
 	    j = Pe [i] ;
 	    ASSERT (j >= TRILINOS_AMD_EMPTY && j < n) ;
-	    TRILINOS_AMD_DEBUG3 (("	j: "ID"\n", j)) ;
+	    TRILINOS_AMD_DEBUG3 (("	j: " ID "\n", j)) ;
 	    if (j == TRILINOS_AMD_EMPTY)
 	    {
 		/* Skip a dense variable.  It has no parent. */
@@ -1731,14 +1731,14 @@ GLOBAL void TRILINOS_AMD_2
 	    /* while (j is a variable) */
 	    while (Nv [j] == 0)
 	    {
-		TRILINOS_AMD_DEBUG3 (("		j : "ID"\n", j)) ;
+		TRILINOS_AMD_DEBUG3 (("		j : " ID "\n", j)) ;
 		j = Pe [j] ;
-		TRILINOS_AMD_DEBUG3 (("		j:: "ID"\n", j)) ;
+		TRILINOS_AMD_DEBUG3 (("		j:: " ID "\n", j)) ;
 		ASSERT (j >= 0 && j < n) ;
 	    }
 	    /* got to an element e */
 	    e = j ;
-	    TRILINOS_AMD_DEBUG3 (("got to e: "ID"\n", e)) ;
+	    TRILINOS_AMD_DEBUG3 (("got to e: " ID "\n", e)) ;
 
 	    /* -------------------------------------------------------------
 	     * traverse the path again from i to e, and compress the path
@@ -1751,7 +1751,7 @@ GLOBAL void TRILINOS_AMD_2
 	    while (Nv [j] == 0)
 	    {
 		jnext = Pe [j] ;
-		TRILINOS_AMD_DEBUG3 (("j "ID" jnext "ID"\n", j, jnext)) ;
+		TRILINOS_AMD_DEBUG3 (("j " ID " jnext " ID "\n", j, jnext)) ;
 		Pe [j] = e ;
 		j = jnext ;
 		ASSERT (j >= 0 && j < n) ;
@@ -1837,6 +1837,6 @@ GLOBAL void TRILINOS_AMD_2
 	k = Next [i] ;
 	ASSERT (k >= 0 && k < n) ;
 	Last [k] = i ;
-	TRILINOS_AMD_DEBUG2 (("   perm ["ID"] = "ID"\n", k, i)) ;
+	TRILINOS_AMD_DEBUG2 (("   perm [" ID "] = " ID "\n", k, i)) ;
     }
 }
