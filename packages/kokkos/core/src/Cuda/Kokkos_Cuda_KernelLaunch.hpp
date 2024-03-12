@@ -40,7 +40,8 @@
 #ifdef KOKKOS_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE
 
 __device__ __constant__ extern unsigned long
-    kokkos_impl_cuda_constant_memory_buffer[];
+    // kokkos_impl_cuda_constant_memory_buffer[];
+    kokkos_impl_cuda_constant_memory_buffer[Kokkos::Impl::CudaTraits::ConstantMemoryUsage / sizeof(unsigned long)];
 
 #else
 
