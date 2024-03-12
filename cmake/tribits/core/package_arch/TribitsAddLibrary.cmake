@@ -53,6 +53,7 @@ include(TribitsSetAndIncDirs)
 
 # List of packages to exclude from setting language based on Kokkos configuration
 set(TRIBITS_NOKOKKOS_PACKAGES
+  epetra
   aztecoo
   amesos
   ml
