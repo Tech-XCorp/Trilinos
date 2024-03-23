@@ -482,7 +482,7 @@ APPEND_SET(SOURCES
   Utilities/Communication/comm_do_reverse.c
   Utilities/Communication/comm_info.c
   Utilities/Communication/comm_create.c
-  Utilities/Communication/comm_default.c
+  Utilities/Communication/comm_default.cpp
   Utilities/Communication/comm_resize.c
   Utilities/Communication/comm_sort_ints.c
   Utilities/Communication/comm_destroy.c
@@ -506,7 +506,7 @@ APPEND_SET(SOURCES
   Utilities/shared/zoltan_align.c
   Utilities/shared/zoltan_id.c
   )
-set_source_files_properties(Utilities/Communication/comm_default.c PROPERTIES LANGUAGE CXX)
+# set_source_files_properties(Utilities/Communication/comm_default.c PROPERTIES LANGUAGE CXX)
 #
 # src/zz
 #
