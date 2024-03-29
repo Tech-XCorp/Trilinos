@@ -1,4 +1,4 @@
-INCLUDE(CheckCXXSourceRuns)
+INCLUDE(CheckSourceRuns)
 
 FUNCTION(CHECK_BLAS_FLOAT VARNAME)
 
@@ -53,7 +53,13 @@ int main()
 }
   "
   )
-  
-  CHECK_CXX_SOURCE_RUNS("${SOURCE}" ${VARNAME})
+
+# We need to check with compilation for the language used.  Note that this
+# approach requires CMake version >= 3.19.
+  IF(TRILINOS_COMPILE_LANGUAGE)
+    CHECK_SOURCE_RUNS(${TRILINOS_COMPILE_LANGUAGE} "${SOURCE}" ${VARNAME})
+  ELSE()
+    CHECK_SOURCE_RUNS(CXX "${SOURCE}" ${VARNAME})
+  ENDIF()
   
 ENDFUNCTION()
