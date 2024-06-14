@@ -732,10 +732,11 @@ sortAndMergeCrsEntries (const Teuchos::ArrayView<size_t> &CRS_rowptr,
                         const Teuchos::ArrayView<Ordinal> & CRS_colind)
 {
   Teuchos::ArrayView<Tpetra::Details::DefaultTypes::scalar_type> CRS_vals;
-  return sortAndMergeCrsEntries(CRS_rowptr, CRS_colind, CRS_vals);
+  // We need this to call the two-template argument function, not the
+  // three-template argument one
+  return sortAndMergeCrsEntries<Tpetra::Details::DefaultTypes::scalar_type, Ordinal>(
+    CRS_rowptr, CRS_colind, CRS_vals);
 }
-
-#ifndef _WIN32
 
 template<class rowptr_view_type, class colind_view_type, class vals_view_type>
 void
@@ -753,8 +754,6 @@ sortAndMergeCrsEntries(rowptr_view_type& CRS_rowptr,
 				      colind_view_type, vals_view_type>(CRS_rowptr_in, CRS_colind_in, CRS_vals_in,
 									CRS_rowptr, CRS_colind, CRS_vals);
 }
-
-#endif
 
 template <typename LocalOrdinal, typename GlobalOrdinal, typename Node>
 void

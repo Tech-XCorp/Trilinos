@@ -57,6 +57,7 @@ set(TRIBITS_NOKOKKOS_PACKAGES
   aztecoo
   amesos
   ml
+  trilinosss
   zoltan)
 
 # @FUNCTION: tribits_add_library()
@@ -381,7 +382,12 @@ function(tribits_add_library  LIBRARY_NAME_IN)
   if((DEFINED TRILINOS_COMPILE_LANGUAGE) AND NOT (${LIBRARY_NAME} IN_LIST TRIBITS_NOKOKKOS_PACKAGES))
     message(STATUS "  Setting compile language.")
     foreach(source ${PARSE_SOURCES})
-      set_source_files_properties(${source} PROPERTIES LANGUAGE ${TRILINOS_COMPILE_LANGUAGE})
+      # Check if it's a C source
+      if("${source}" MATCHES "\.c$")
+        message(STATUS "    Not setting language for C source file ${source}.")
+      else()
+        set_source_files_properties(${source} PROPERTIES LANGUAGE ${TRILINOS_COMPILE_LANGUAGE})
+      endif()
     endforeach()
   endif()
 
